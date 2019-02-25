@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IDigitBoxState } from "./IDigitBoxState";
 import { IDigitBoxProps } from "./IDigitBoxProps";
-import styles from "./DigitBox.module.scss";
+
 
 class DigitBox extends React.Component<IDigitBoxProps, IDigitBoxState> {
   constructor(props: IDigitBoxProps) {
@@ -11,9 +11,10 @@ class DigitBox extends React.Component<IDigitBoxProps, IDigitBoxState> {
 
   public render(): JSX.Element {
     return (
-      <div className={`${styles.digitBox}`}>
-        <h2>{this.props.children}</h2>
-      </div>
+      <svg width={this.props.size} height={this.props.size} x={this.props.x} y={this.props.y}>
+        <rect x="0" y="0" width={this.props.size} height={this.props.size} style={{ stroke: "black", strokeWidth: 1, fill: "none" }}></rect>
+        <text x={this.props.size*.25} y={this.props.size*.75} fontSize={this.props.size*.9}>{this.props.children}</text>
+      </svg>
     );
   }
 }
