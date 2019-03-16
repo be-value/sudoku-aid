@@ -1,8 +1,10 @@
-import { Sudoku } from "../../core/Sudoku";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import CellUI from "../CellUI/CellUI";
+import { selectCell } from "../../utils/actions";
+import { ISudokuUIUIProps } from "./ISudokuUIProps";
 
-class SudokuUI extends Component<{}, {width: number, height: number}> {
+class SudokuUI extends Component<ISudokuUIUIProps | any, {width: number, height: number}> {
   constructor(props: any) {
     super(props);
     this.state = { width: window.innerWidth, height: window.innerHeight };
@@ -30,9 +32,14 @@ class SudokuUI extends Component<{}, {width: number, height: number}> {
     return this.myWidth() / 9;
   }
 
+  onClick = () => {
+    alert("hello");
+    this.props.selectCell("Hi from redux");
+  }
+
   render(): JSX.Element {
     return (
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center" }} onClick={this.onClick}>
         <svg style={{ width: this.myWidth(), height: this.myWidth() }}>
           <rect x="0" y="0" width={this.myWidth()} height={this.myWidth()} style={{ stroke: "black", strokeWidth: 8, fill: "none" }}></rect>
           <line x1={3*this.cellWidth()-2} y1={0}
@@ -134,4 +141,10 @@ class SudokuUI extends Component<{}, {width: number, height: number}> {
   }
 }
 
-export default SudokuUI;
+function mapDispatchToProps(dispatch: any): any {
+  return {
+    selectCell: (cell: string) => dispatch(selectCell(cell))
+  };
+}
+
+export default connect(null, mapDispatchToProps)(SudokuUI);

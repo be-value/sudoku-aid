@@ -7,9 +7,11 @@
     "@types/node": "10.12.19",
     "@types/react": "16.7.22",
     "@types/react-dom": "16.0.11",
+    "@types/react-redux": "^7.0.3",
     "node-sass": "^4.11.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-redux": "^6.0.1",
     "react-scripts": "^2.1.8",
     "redux": "^4.0.1",
     "typescript": "3.2.4"
@@ -29,5 +31,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {}
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.8"
+  }
 }
