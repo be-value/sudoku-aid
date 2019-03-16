@@ -1,7 +1,7 @@
 /* tslint:disable */
-  require('./DigitBox.module.scss');
+  require('./CellUI.module.scss');
   const styles = {
-    digitBox: 'digitBox_613d8040',
+    cellUI: 'cellUI_613d8040',
   };
 
   export default styles;

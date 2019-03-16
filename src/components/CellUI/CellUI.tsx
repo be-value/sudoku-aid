@@ -1,10 +1,10 @@
 import * as React from "react";
-import { IDigitBoxState } from "./IDigitBoxState";
-import { IDigitBoxProps } from "./IDigitBoxProps";
+import { ICellUIState } from "./ICellUIState";
+import { ICellUIProps } from "./ICellUIProps";
 
 
-class DigitBox extends React.Component<IDigitBoxProps, IDigitBoxState> {
-  constructor(props: IDigitBoxProps) {
+class CellUI extends React.Component<ICellUIProps, ICellUIState> {
+  constructor(props: ICellUIProps) {
     super(props);
     this.state = {};
   }
@@ -19,4 +19,4 @@ class DigitBox extends React.Component<IDigitBoxProps, IDigitBoxState> {
   }
 }
 
-export default DigitBox;
+export default CellUI;
