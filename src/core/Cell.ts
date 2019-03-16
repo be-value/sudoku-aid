@@ -5,10 +5,10 @@ export class Cell {
   public readonly name: string;
 
   // the value of the cell
-  private value: number | null;
+  public readonly value: number | null;
 
   // the possible options for of the cell
-  private options: Array<number>;
+  public options: Array<number>;
 
   constructor(
     name: string,

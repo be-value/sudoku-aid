@@ -4,8 +4,8 @@ const cols: string = "abcdefghi";
 const rows: string = "123456789";
 
 export class Sudoku {
-    private cells: any = {};
-    private clusters: any = {};
+    public cells: any = {};
+    public clusters: any = {};
 
     constructor() {
         this.createCells();
@@ -13,11 +13,11 @@ export class Sudoku {
         this.printClusters();
     }
 
-    createCells = () => {
+    private createCells = () => {
         Array.from(cols).forEach(c => Array.from(rows).forEach(r => this.cells[`${c}${r}`] = new Cell(`${c}${r}`, null )));
     }
 
-    createClusters = () => {
+    private createClusters = () => {
         Array.from(cols).forEach(c => this.createCluster(c, c, rows));
         Array.from(rows).forEach(r => this.createCluster(r, cols, r));
         this.createCluster("I", cols.substring(0, 3), rows.substring(0, 3));
@@ -31,13 +31,13 @@ export class Sudoku {
         this.createCluster("IX", cols.substring(6), rows.substring(6));
     }
 
-    createCluster = (clusterName: string, colsStr: string, rowsStr: string) => {
+    private createCluster = (clusterName: string, colsStr: string, rowsStr: string) => {
         let keys : Array<string> = new Array<string>();
         Array.from(colsStr).forEach(col => Array.from(rowsStr).forEach(row => keys.push(`${col}${row}`)));
         this.clusters[clusterName] = keys.map(key => this.cells[key]);
     }
 
-    printClusters = () => {
+    private printClusters = () => {
         // tslint:disable-next-line:forin
         for (var clusterName in this.clusters) {
             var cluster: any = this.clusters[clusterName];

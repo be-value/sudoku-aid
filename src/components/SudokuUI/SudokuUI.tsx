@@ -4,6 +4,7 @@ import CellUI from "../CellUI/CellUI";
 import { selectCell } from "../../utils/actions";
 import { ISudokuUIUIProps } from "./ISudokuUIProps";
 import { ISudokuUIState } from "./ISudokuUIState";
+import { ISudokuState } from "../../utils/store/ISudokuState";
 
 class SudokuUI extends Component<ISudokuUIUIProps | any, ISudokuUIState> {
   constructor(props: any) {
@@ -33,14 +34,9 @@ class SudokuUI extends Component<ISudokuUIUIProps | any, ISudokuUIState> {
     return this.myWidth() / 9;
   }
 
-  onClick = () => {
-    alert("hello");
-    this.props.selectCell("Hi from redux");
-  }
-
   render(): JSX.Element {
     return (
-      <div style={{ textAlign: "center" }} onClick={this.onClick}>
+      <div style={{ textAlign: "center" }}>
         <svg style={{ width: this.myWidth(), height: this.myWidth() }}>
           <rect x="0" y="0" width={this.myWidth()} height={this.myWidth()} style={{ stroke: "black", strokeWidth: 8, fill: "none" }}></rect>
           <line x1={3*this.cellWidth()-2} y1={0}
@@ -55,97 +51,95 @@ class SudokuUI extends Component<ISudokuUIUIProps | any, ISudokuUIState> {
           <line x1={0} y1={6*this.cellWidth()-2}
                 x2={this.myWidth()} y2={6*this.cellWidth()-2}
                 style={{ stroke: "black", strokeWidth: 4 }}></line>
-          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 0 * this.cellWidth()}>a1</CellUI>
-          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 0 * this.cellWidth()}>b1</CellUI>
-          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 0 * this.cellWidth()}>c1</CellUI>
-          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 0 * this.cellWidth()}>d1</CellUI>
-          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 0 * this.cellWidth()}>e1 </CellUI>
-          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 0 * this.cellWidth()}>f1</CellUI>
-          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 0 * this.cellWidth()}>g1</CellUI>
-          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 0 * this.cellWidth()}>h1</CellUI>
-          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 0 * this.cellWidth()}>i1</CellUI>
-          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 1 * this.cellWidth()}>a2</CellUI>
-          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 1 * this.cellWidth()}>b2</CellUI>
-          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 1 * this.cellWidth()}>c2</CellUI>
-          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 1 * this.cellWidth()}>d2</CellUI>
-          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 1 * this.cellWidth()}>e2</CellUI>
-          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 1 * this.cellWidth()}>f2</CellUI>
-          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 1 * this.cellWidth()}>g2</CellUI>
-          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 1 * this.cellWidth()}>h2</CellUI>
-          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 1 * this.cellWidth()}>i2</CellUI>
-          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 2 * this.cellWidth()}>a3</CellUI>
-          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 2 * this.cellWidth()}>b3</CellUI>
-          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 2 * this.cellWidth()}>c3</CellUI>
-          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 2 * this.cellWidth()}>d3</CellUI>
-          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 2 * this.cellWidth()}>e3</CellUI>
-          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 2 * this.cellWidth()}>f3</CellUI>
-          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 2 * this.cellWidth()}>g3</CellUI>
-          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 2 * this.cellWidth()}>h3</CellUI>
-          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 2 * this.cellWidth()}>i3</CellUI>
-          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 3 * this.cellWidth()}>a4</CellUI>
-          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 3 * this.cellWidth()}>b4</CellUI>
-          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 3 * this.cellWidth()}>c4</CellUI>
-          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 3 * this.cellWidth()}>d4</CellUI>
-          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 3 * this.cellWidth()}>e4</CellUI>
-          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 3 * this.cellWidth()}>f4</CellUI>
-          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 3 * this.cellWidth()}>g4</CellUI>
-          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 3 * this.cellWidth()}>h4</CellUI>
-          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 3 * this.cellWidth()}>i4</CellUI>
-          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 4 * this.cellWidth()}>a5</CellUI>
-          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 4 * this.cellWidth()}>b5</CellUI>
-          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 4 * this.cellWidth()}>c5</CellUI>
-          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 4 * this.cellWidth()}>d5</CellUI>
-          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 4 * this.cellWidth()}>e5</CellUI>
-          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 4 * this.cellWidth()}>f5</CellUI>
-          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 4 * this.cellWidth()}>g5</CellUI>
-          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 4 * this.cellWidth()}>h5</CellUI>
-          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 4 * this.cellWidth()}>i5</CellUI>
-          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 5 * this.cellWidth()}>a6</CellUI>
-          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 5 * this.cellWidth()}>b6</CellUI>
-          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 5 * this.cellWidth()}>c6</CellUI>
-          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 5 * this.cellWidth()}>d6</CellUI>
-          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 5 * this.cellWidth()}>e6</CellUI>
-          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 5 * this.cellWidth()}>f6</CellUI>
-          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 5 * this.cellWidth()}>g6</CellUI>
-          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 5 * this.cellWidth()}>h6</CellUI>
-          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 5 * this.cellWidth()}>i6</CellUI>
-          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 6 * this.cellWidth()}>a7</CellUI>
-          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 6 * this.cellWidth()}>b7</CellUI>
-          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 6 * this.cellWidth()}>c7</CellUI>
-          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 6 * this.cellWidth()}>d7</CellUI>
-          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 6 * this.cellWidth()}>e7</CellUI>
-          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 6 * this.cellWidth()}>f7</CellUI>
-          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 6 * this.cellWidth()}>g7</CellUI>
-          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 6 * this.cellWidth()}>h7</CellUI>
-          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 6 * this.cellWidth()}>i7</CellUI>
-          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 7 * this.cellWidth()}>a8</CellUI>
-          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 7 * this.cellWidth()}>b8</CellUI>
-          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 7 * this.cellWidth()}>c8</CellUI>
-          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 7 * this.cellWidth()}>d8</CellUI>
-          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 7 * this.cellWidth()}>e8</CellUI>
-          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 7 * this.cellWidth()}>f8</CellUI>
-          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 7 * this.cellWidth()}>g8</CellUI>
-          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 7 * this.cellWidth()}>h8</CellUI>
-          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 7 * this.cellWidth()}>i8</CellUI>
-          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 8 * this.cellWidth()}>a9</CellUI>
-          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 8 * this.cellWidth()}>b9</CellUI>
-          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 8 * this.cellWidth()}>c9</CellUI>
-          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 8 * this.cellWidth()}>d9</CellUI>
-          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 8 * this.cellWidth()}>e9</CellUI>
-          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 8 * this.cellWidth()}>f9</CellUI>
-          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 8 * this.cellWidth()}>g9</CellUI>
-          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 8 * this.cellWidth()}>h9</CellUI>
-          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 8 * this.cellWidth()}>i9</CellUI>
+          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 0 * this.cellWidth()} cell={this.props.cells["a1"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 0 * this.cellWidth()} cell={this.props.cells["b1"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 0 * this.cellWidth()} cell={this.props.cells["c1"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 0 * this.cellWidth()} cell={this.props.cells["d1"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 0 * this.cellWidth()} cell={this.props.cells["e1"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 0 * this.cellWidth()} cell={this.props.cells["f1"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 0 * this.cellWidth()} cell={this.props.cells["g1"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 0 * this.cellWidth()} cell={this.props.cells["h1"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 0 * this.cellWidth()} cell={this.props.cells["i1"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 1 * this.cellWidth()} cell={this.props.cells["a2"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 1 * this.cellWidth()} cell={this.props.cells["b2"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 1 * this.cellWidth()} cell={this.props.cells["c2"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 1 * this.cellWidth()} cell={this.props.cells["d2"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 1 * this.cellWidth()} cell={this.props.cells["e2"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 1 * this.cellWidth()} cell={this.props.cells["f2"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 1 * this.cellWidth()} cell={this.props.cells["g2"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 1 * this.cellWidth()} cell={this.props.cells["h2"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 1 * this.cellWidth()} cell={this.props.cells["i2"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 2 * this.cellWidth()} cell={this.props.cells["a3"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 2 * this.cellWidth()} cell={this.props.cells["b3"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 2 * this.cellWidth()} cell={this.props.cells["c3"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 2 * this.cellWidth()} cell={this.props.cells["d3"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 2 * this.cellWidth()} cell={this.props.cells["e3"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 2 * this.cellWidth()} cell={this.props.cells["f3"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 2 * this.cellWidth()} cell={this.props.cells["g3"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 2 * this.cellWidth()} cell={this.props.cells["h3"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 2 * this.cellWidth()} cell={this.props.cells["i3"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 3 * this.cellWidth()} cell={this.props.cells["a4"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 3 * this.cellWidth()} cell={this.props.cells["b4"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 3 * this.cellWidth()} cell={this.props.cells["c4"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 3 * this.cellWidth()} cell={this.props.cells["d4"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 3 * this.cellWidth()} cell={this.props.cells["e4"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 3 * this.cellWidth()} cell={this.props.cells["f4"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 3 * this.cellWidth()} cell={this.props.cells["g4"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 3 * this.cellWidth()} cell={this.props.cells["h4"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 3 * this.cellWidth()} cell={this.props.cells["i4"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 4 * this.cellWidth()} cell={this.props.cells["a5"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 4 * this.cellWidth()} cell={this.props.cells["b5"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 4 * this.cellWidth()} cell={this.props.cells["c5"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 4 * this.cellWidth()} cell={this.props.cells["d5"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 4 * this.cellWidth()} cell={this.props.cells["e5"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 4 * this.cellWidth()} cell={this.props.cells["f5"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 4 * this.cellWidth()} cell={this.props.cells["g5"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 4 * this.cellWidth()} cell={this.props.cells["h5"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 4 * this.cellWidth()} cell={this.props.cells["i5"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 5 * this.cellWidth()} cell={this.props.cells["a6"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 5 * this.cellWidth()} cell={this.props.cells["b6"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 5 * this.cellWidth()} cell={this.props.cells["c6"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 5 * this.cellWidth()} cell={this.props.cells["d6"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 5 * this.cellWidth()} cell={this.props.cells["e6"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 5 * this.cellWidth()} cell={this.props.cells["f6"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 5 * this.cellWidth()} cell={this.props.cells["g6"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 5 * this.cellWidth()} cell={this.props.cells["h6"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 5 * this.cellWidth()} cell={this.props.cells["i6"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 6 * this.cellWidth()} cell={this.props.cells["a7"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 6 * this.cellWidth()} cell={this.props.cells["b7"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 6 * this.cellWidth()} cell={this.props.cells["c7"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 6 * this.cellWidth()} cell={this.props.cells["d7"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 6 * this.cellWidth()} cell={this.props.cells["e7"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 6 * this.cellWidth()} cell={this.props.cells["f7"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 6 * this.cellWidth()} cell={this.props.cells["g7"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 6 * this.cellWidth()} cell={this.props.cells["h7"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 6 * this.cellWidth()} cell={this.props.cells["i7"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 7 * this.cellWidth()} cell={this.props.cells["a8"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 7 * this.cellWidth()} cell={this.props.cells["b8"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 7 * this.cellWidth()} cell={this.props.cells["c8"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 7 * this.cellWidth()} cell={this.props.cells["d8"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 7 * this.cellWidth()} cell={this.props.cells["e8"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 7 * this.cellWidth()} cell={this.props.cells["f8"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 7 * this.cellWidth()} cell={this.props.cells["g8"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 7 * this.cellWidth()} cell={this.props.cells["h8"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 7 * this.cellWidth()} cell={this.props.cells["i8"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={0*this.cellWidth()} y={ 8 * this.cellWidth()} cell={this.props.cells["a9"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={1*this.cellWidth()} y={ 8 * this.cellWidth()} cell={this.props.cells["b9"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={2*this.cellWidth()} y={ 8 * this.cellWidth()} cell={this.props.cells["c9"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={3*this.cellWidth()} y={ 8 * this.cellWidth()} cell={this.props.cells["d9"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={4*this.cellWidth()} y={ 8 * this.cellWidth()} cell={this.props.cells["e9"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={5*this.cellWidth()} y={ 8 * this.cellWidth()} cell={this.props.cells["f9"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={6*this.cellWidth()} y={ 8 * this.cellWidth()} cell={this.props.cells["g9"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={7*this.cellWidth()} y={ 8 * this.cellWidth()} cell={this.props.cells["h9"]}></CellUI>
+          <CellUI size={this.cellWidth()} x={8*this.cellWidth()} y={ 8 * this.cellWidth()} cell={this.props.cells["i9"]}></CellUI>
         </svg>
       </div>
     );
   }
 }
 
-function mapDispatchToProps(dispatch: any): any {
-  return {
-    selectCell: (cell: string) => dispatch(selectCell(cell))
-  };
+function mapStateToProps(state: ISudokuState): any {
+  return { cells: state.game.cells };
 }
 
-export default connect(null, mapDispatchToProps)(SudokuUI);
+export default connect(mapStateToProps, null)(SudokuUI);

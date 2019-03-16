@@ -1,5 +1,5 @@
-import { IAction } from "../../utils/actions/IAction";
+import { Sudoku } from "../../core/Sudoku";
 
 export interface ISudokuUIUIProps {
-  selectCell: (payload: string) => any;
+  cells: any;
 }
