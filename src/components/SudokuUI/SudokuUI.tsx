@@ -9,9 +9,6 @@ class SudokuUI extends Component<{}, {width: number, height: number}> {
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
 
-  // tODO: put sudoku into redux state?!
-  private sudoku : Sudoku = new Sudoku();
-
   componentDidMount(): void {
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
