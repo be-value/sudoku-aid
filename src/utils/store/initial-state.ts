@@ -1,8 +1,10 @@
 import { Sudoku } from "../../core/Sudoku";
 import { ISudokuState } from "./ISudokuState";
 
-export default {
+const initialState: ISudokuState = {
   game: new  Sudoku(),
-  selectedCellName: "",
-} as ISudokuState;
+  selectedCellName: ""
+};
+
+export default initialState;
 

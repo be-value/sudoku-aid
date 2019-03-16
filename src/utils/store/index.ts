@@ -5,7 +5,7 @@ import initialState from "./initial-state";
 
 const store: any = createStore(
   rootReducer,
-  initialState as any,
+  initialState,
   compose(devToolsEnhancer({}))
 );
 

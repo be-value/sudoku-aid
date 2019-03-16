@@ -13,7 +13,9 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
     return (
       <svg width={this.props.size} height={this.props.size} x={this.props.x} y={this.props.y}>
         <rect x="0" y="0" width={this.props.size} height={this.props.size} style={{ stroke: "black", strokeWidth: 1, fill: "none" }}></rect>
-        <text x={this.props.size*.25} y={this.props.size*.75} fontSize={this.props.size*.9}>{this.props.children}</text>
+
+        // TODO: resize the fontsize to .9 ipv .5
+        <text x={this.props.size*.25} y={this.props.size*.75} fontSize={this.props.size*.5}>{this.props.children}</text>
       </svg>
     );
   }
