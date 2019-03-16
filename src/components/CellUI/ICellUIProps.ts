@@ -5,4 +5,5 @@ export interface ICellUIProps {
   x: number;
   y: number;
   cell: Cell;
+  selectCell?: any;
 }
