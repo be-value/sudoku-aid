@@ -1,0 +1,36 @@
+/* .cellUI {
+  .cell {
+    :hover {
+      cursor: progress;
+    }
+  }
+} */
+
+.cell {
+  fill: white;
+}
+
+.cell:hover {
+  fill: gray;
+  cursor: pointer;
+}
+
+.rect { 
+  fill: inherit;
+  stroke: black;
+  stroke-width: 1pt;
+}
+
+.rect:hover {
+  fill: inherit;
+  stroke-width: 2pt;
+  cursor: inherit;
+}
+
+.text {
+  fill: black;
+}
+
+.text:hover {
+  fill:white;
+} 
