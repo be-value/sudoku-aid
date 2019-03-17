@@ -46,7 +46,6 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
           }
         >
           <rect x="0" y="0" width={this.props.size} height={this.props.size} />
-          // TODO: resize the fontsize to .9 ipv .5 AND show .value ipv .name
           <text
             x={this.props.size * 0.35}
             y={this.props.size * 0.7}
