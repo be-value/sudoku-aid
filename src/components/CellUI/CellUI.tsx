@@ -13,7 +13,9 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
   }
 
   private onClick = () => {
-    this.props.selectCell(this.props.cell.name);
+    this.props.cell.name === this.props.selectedCellName
+      ? this.props.selectCell("")
+      : this.props.selectCell(this.props.cell.name);
   }
 
   public render(): JSX.Element {
