@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import CellUI from "../CellUI/CellUI";
-import { selectCell } from "../../utils/actions";
+import { cellInput } from "../../utils/actions";
 import { ISudokuUIUIProps } from "./ISudokuUIProps";
 import { ISudokuUIState } from "./ISudokuUIState";
-import { ISudokuState } from "../../utils/store/ISudokuState";
 
 class SudokuUI extends Component<ISudokuUIUIProps | any, ISudokuUIState> {
   constructor(props: any) {
@@ -48,7 +47,7 @@ class SudokuUI extends Component<ISudokuUIUIProps | any, ISudokuUIState> {
 
   render(): JSX.Element {
     return (
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center" }} tabIndex={0}>
         <svg style={{ width: this.myWidth(), height: this.myWidth() }}>
           <rect x="0"
                 y="0"
@@ -68,95 +67,91 @@ class SudokuUI extends Component<ISudokuUIUIProps | any, ISudokuUIState> {
           <line x1={0} y1={this.linePos(2)}
                 x2={this.myWidth()} y2={this.linePos(2)}
                 style={{ stroke: "black", strokeWidth: this.lineWidth }}></line>
-          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(0)} cell={this.props.cells.a1}/>
-          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(0)} cell={this.props.cells.b1}/>
-          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(0)} cell={this.props.cells.c1}/>
-          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(0)} cell={this.props.cells.d1}/>
-          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(0)} cell={this.props.cells.e1}/>
-          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(0)} cell={this.props.cells.f1}/>
-          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(0)} cell={this.props.cells.g1}/>
-          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(0)} cell={this.props.cells.h1}/>
-          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(0)} cell={this.props.cells.i1}/>
-          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(1)} cell={this.props.cells.a2}/>
-          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(1)} cell={this.props.cells.b2}/>
-          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(1)} cell={this.props.cells.c2}/>
-          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(1)} cell={this.props.cells.d2}/>
-          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(1)} cell={this.props.cells.e2}/>
-          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(1)} cell={this.props.cells.f2}/>
-          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(1)} cell={this.props.cells.g2}/>
-          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(1)} cell={this.props.cells.h2}/>
-          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(1)} cell={this.props.cells.i2}/>
-          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(2)} cell={this.props.cells.a3}/>
-          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(2)} cell={this.props.cells.b3}/>
-          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(2)} cell={this.props.cells.c3}/>
-          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(2)} cell={this.props.cells.d3}/>
-          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(2)} cell={this.props.cells.e3}/>
-          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(2)} cell={this.props.cells.f3}/>
-          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(2)} cell={this.props.cells.g3}/>
-          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(2)} cell={this.props.cells.h3}/>
-          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(2)} cell={this.props.cells.i3}/>
-          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(3)} cell={this.props.cells.a4}/>
-          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(3)} cell={this.props.cells.b4}/>
-          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(3)} cell={this.props.cells.c4}/>
-          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(3)} cell={this.props.cells.d4}/>
-          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(3)} cell={this.props.cells.e4}/>
-          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(3)} cell={this.props.cells.f4}/>
-          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(3)} cell={this.props.cells.g4}/>
-          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(3)} cell={this.props.cells.h4}/>
-          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(3)} cell={this.props.cells.i4}/>
-          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(4)} cell={this.props.cells.a5}/>
-          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(4)} cell={this.props.cells.b5}/>
-          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(4)} cell={this.props.cells.c5}/>
-          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(4)} cell={this.props.cells.d5}/>
-          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(4)} cell={this.props.cells.e5}/>
-          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(4)} cell={this.props.cells.f5}/>
-          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(4)} cell={this.props.cells.g5}/>
-          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(4)} cell={this.props.cells.h5}/>
-          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(4)} cell={this.props.cells.i5}/>
-          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(5)} cell={this.props.cells.a6}/>
-          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(5)} cell={this.props.cells.b6}/>
-          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(5)} cell={this.props.cells.c6}/>
-          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(5)} cell={this.props.cells.d6}/>
-          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(5)} cell={this.props.cells.e6}/>
-          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(5)} cell={this.props.cells.f6}/>
-          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(5)} cell={this.props.cells.g6}/>
-          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(5)} cell={this.props.cells.h6}/>
-          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(5)} cell={this.props.cells.i6}/>
-          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(6)} cell={this.props.cells.a7}/>
-          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(6)} cell={this.props.cells.b7}/>
-          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(6)} cell={this.props.cells.c7}/>
-          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(6)} cell={this.props.cells.d7}/>
-          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(6)} cell={this.props.cells.e7}/>
-          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(6)} cell={this.props.cells.f7}/>
-          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(6)} cell={this.props.cells.g7}/>
-          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(6)} cell={this.props.cells.h7}/>
-          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(6)} cell={this.props.cells.i7}/>
-          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(7)} cell={this.props.cells.a8}/>
-          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(7)} cell={this.props.cells.b8}/>
-          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(7)} cell={this.props.cells.c8}/>
-          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(7)} cell={this.props.cells.d8}/>
-          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(7)} cell={this.props.cells.e8}/>
-          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(7)} cell={this.props.cells.f8}/>
-          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(7)} cell={this.props.cells.g8}/>
-          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(7)} cell={this.props.cells.h8}/>
-          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(7)} cell={this.props.cells.i8}/>
-          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(8)} cell={this.props.cells.a9}/>
-          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(8)} cell={this.props.cells.b9}/>
-          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(8)} cell={this.props.cells.c9}/>
-          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(8)} cell={this.props.cells.d9}/>
-          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(8)} cell={this.props.cells.e9}/>
-          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(8)} cell={this.props.cells.f9}/>
-          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(8)} cell={this.props.cells.g9}/>
-          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(8)} cell={this.props.cells.h9}/>
-          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(8)} cell={this.props.cells.i9}/>
+          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(0)} cellName={"a1"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(0)} cellName={"b1"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(0)} cellName={"c1"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(0)} cellName={"d1"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(0)} cellName={"e1"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(0)} cellName={"f1"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(0)} cellName={"g1"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(0)} cellName={"h1"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(0)} cellName={"i1"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(1)} cellName={"a2"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(1)} cellName={"b2"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(1)} cellName={"c2"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(1)} cellName={"d2"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(1)} cellName={"e2"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(1)} cellName={"f2"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(1)} cellName={"g2"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(1)} cellName={"h2"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(1)} cellName={"i2"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(2)} cellName={"a3"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(2)} cellName={"b3"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(2)} cellName={"c3"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(2)} cellName={"d3"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(2)} cellName={"e3"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(2)} cellName={"f3"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(2)} cellName={"g3"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(2)} cellName={"h3"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(2)} cellName={"i3"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(3)} cellName={"a4"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(3)} cellName={"b4"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(3)} cellName={"c4"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(3)} cellName={"d4"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(3)} cellName={"e4"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(3)} cellName={"f4"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(3)} cellName={"g4"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(3)} cellName={"h4"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(3)} cellName={"i4"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(4)} cellName={"a5"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(4)} cellName={"b5"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(4)} cellName={"c5"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(4)} cellName={"d5"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(4)} cellName={"e5"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(4)} cellName={"f5"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(4)} cellName={"g5"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(4)} cellName={"h5"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(4)} cellName={"i5"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(5)} cellName={"a6"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(5)} cellName={"b6"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(5)} cellName={"c6"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(5)} cellName={"d6"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(5)} cellName={"e6"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(5)} cellName={"f6"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(5)} cellName={"g6"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(5)} cellName={"h6"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(5)} cellName={"i6"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(6)} cellName={"a7"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(6)} cellName={"b7"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(6)} cellName={"c7"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(6)} cellName={"d7"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(6)} cellName={"e7"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(6)} cellName={"f7"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(6)} cellName={"g7"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(6)} cellName={"h7"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(6)} cellName={"i7"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(7)} cellName={"a8"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(7)} cellName={"b8"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(7)} cellName={"c8"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(7)} cellName={"d8"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(7)} cellName={"e8"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(7)} cellName={"f8"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(7)} cellName={"g8"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(7)} cellName={"h8"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(7)} cellName={"i8"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(0)} y={this.pos(8)} cellName={"a9"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(1)} y={this.pos(8)} cellName={"b9"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(2)} y={this.pos(8)} cellName={"c9"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(3)} y={this.pos(8)} cellName={"d9"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(4)} y={this.pos(8)} cellName={"e9"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(5)} y={this.pos(8)} cellName={"f9"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(6)} y={this.pos(8)} cellName={"g9"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(8)} cellName={"h9"}/>
+          <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(8)} cellName={"i9"}/>
         </svg>
       </div>
     );
   }
 }
 
-function mapStateToProps(state: ISudokuState): any {
-  return { cells: state.game.cells };
-}
-
-export default connect(mapStateToProps, null)(SudokuUI);
+export default SudokuUI;

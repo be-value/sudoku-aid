@@ -1,5 +1,4 @@
-import { Sudoku } from "../../core/Sudoku";
+import { ISudokuState } from "../../utils/store/ISudokuState";
 
 export interface ISudokuUIUIProps {
-  cells: any;
 }

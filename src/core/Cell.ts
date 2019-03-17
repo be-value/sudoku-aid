@@ -5,14 +5,14 @@ export class Cell {
   public readonly name: string;
 
   // the value of the cell
-  public readonly value: number | null;
+  public value: number | undefined;
 
   // the possible options for of the cell
-  public options: Array<number>;
+  public options: Array<number> | undefined;
 
   constructor(
     name: string,
-    value: number | null,
+    value: number | undefined,
     options: Array<number> | undefined = undefined
   ) {
     this.name = name;
@@ -30,7 +30,7 @@ export class Cell {
       return Status.Valid;
     }
 
-    if (this.options.find(option => option === this.value) !== undefined) {
+    if (this.options !== undefined && this.options.find(option => option === this.value) !== undefined) {
       return this.options.length === 1 ? Status.Valid : Status.Unknown;
     }
 
@@ -39,17 +39,16 @@ export class Cell {
 
   // returns true if specified number is a valid option for this cell, false otherwise - no side effects
   public isValidOption(digit: number): boolean {
-    var found: number | undefined = this.options.find(
+    var found: number | undefined = this.options !== undefined ? this.options.find(
       option => option === digit
-    );
+    ) : undefined;
     return found !== undefined;
   }
 
   // invalidate specified option for this cell
   public invalidateOption(digit: number): void {
-    var newOptions: Array<number> = this.options.filter(
+    this.options = this.options !== undefined ? this.options.filter(
       option => option !== digit
-    );
-    this.options = newOptions;
+    ) : undefined;
   }
 }

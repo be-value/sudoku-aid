@@ -14,7 +14,7 @@ export class Sudoku {
     }
 
     private createCells = () => {
-        Array.from(cols).forEach(c => Array.from(rows).forEach(r => this.cells[`${c}${r}`] = new Cell(`${c}${r}`, null )));
+        Array.from(cols).forEach(c => Array.from(rows).forEach(r => this.cells[`${c}${r}`] = new Cell(`${c}${r}`, undefined )));
     }
 
     private createClusters = () => {
