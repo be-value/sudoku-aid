@@ -38,9 +38,9 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
           <text
             x={this.props.size * 0.35}
             y={this.props.size * 0.65}
-            fontSize={this.props.size * 0.65}
+            fontSize={this.props.size * 0.4}
           >
-            {this.props.cell.value}
+            {this.props.cell.name}
           </text>
           <text
             x={this.props.size * 0.05}
