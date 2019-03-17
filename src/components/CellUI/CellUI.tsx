@@ -36,11 +36,18 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
           />
           // TODO: resize the fontsize to .9 ipv .5 AND show .value ipv .name
           <text
-            x={this.props.size * 0.25}
-            y={this.props.size * 0.75}
-            fontSize={this.props.size * 0.6}
+            x={this.props.size * 0.35}
+            y={this.props.size * 0.65}
+            fontSize={this.props.size * 0.65}
           >
-            {this.props.cell.name}
+            {this.props.cell.value}
+          </text>
+          <text
+            x={this.props.size * 0.05}
+            y={this.props.size * 0.95}
+            fontSize={this.props.size * 0.15}
+          >
+            {this.props.cell.options}
           </text>
         </g>
       </svg>
