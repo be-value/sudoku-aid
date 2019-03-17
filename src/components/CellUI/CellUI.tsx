@@ -4,15 +4,15 @@ import { ICellUIProps } from "./ICellUIProps";
 import { connect } from "react-redux";
 import { selectCell } from "../../utils/actions";
 import styles from "./CellUI.module.scss";
+import { ISudokuState } from "../../utils/store/ISudokuState";
 
 class CellUI extends React.Component<ICellUIProps, ICellUIState> {
   constructor(props: ICellUIProps) {
     super(props);
-    this.state = { isSelected: false};
+    this.state = {};
   }
 
-    private onClick = () => {
-    this.setState( {isSelected: !this.state.isSelected });
+  private onClick = () => {
     this.props.selectCell(this.props.cell.name);
   }
 
@@ -25,7 +25,7 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
         y={this.props.y}
         onClick={this.onClick}
       >
-        <g className={this.state.isSelected ? styles.selectedCell : styles.cell}>
+        <g className={this.props.cell.name === this.props.selectedCellName ? styles.selectedCell : styles.cell}>
           <rect
             x="0"
             y="0"
@@ -52,7 +52,13 @@ function mapDispatchToProps(dispatch: any): any {
   };
 }
 
+function mapStateToProps(state: ISudokuState): any {
+  return {
+    selectedCellName: state.selectedCellName
+  };
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(CellUI);

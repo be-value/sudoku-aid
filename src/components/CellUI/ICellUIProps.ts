@@ -6,5 +6,5 @@ export interface ICellUIProps {
   y: number;
   cell: Cell;
   selectCell?: any;
-  isSelected?: boolean;
+  selectedCellName?: string;
 }
