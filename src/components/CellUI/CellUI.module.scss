@@ -1,0 +1,43 @@
+.cell {
+  // Plain an natural Cell css
+  fill: none;
+
+  rect { 
+    fill: inherit;
+    stroke: black;
+    stroke-width: 1pt;
+    cursor: inherit;
+  }
+  
+  text {
+    fill: black;
+  }
+
+  // Hovering over Cell css
+  &:hover {
+    fill: lightgray;
+    cursor: pointer;
+  }
+}
+
+.selectedCell {
+  // Plain an natural Cell css
+  fill: lightblue;
+
+  rect { 
+    fill: inherit;
+    stroke: black;
+    stroke-width: 1pt;
+    cursor: inherit;
+  }
+  
+  text {
+    fill: blue;
+  }
+
+  // Hovering over Cell css
+  &:hover {
+    fill: lightgray;
+    cursor: pointer;
+  }
+}
