@@ -46,11 +46,18 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
           }
         >
           <rect x="0" y="0" width={this.props.size} height={this.props.size} />
+          {/* <foreignObject x="0" y="0" width={this.props.size} height={this.props.size}>
+            <body style={{width: "100%", height: "100%"}}>
+              <form style={{width: "100%", height: "100%"}}>
+                <input style={{width: "100%", height: "100%", display: "table-cell", fontSize: (this.props.size * 0.65), horizontalAlign: "center", color: "white"}} type="text" />
+              </form>
+            </body>
+          </foreignObject> */}
           <text
             x={this.props.size * 0.35}
             y={this.props.size * 0.7}
             fontSize={this.props.size * 0.65}
-          >
+          >          
             {this.props.cellValue}
           </text>
           <text
