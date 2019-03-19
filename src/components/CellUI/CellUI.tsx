@@ -12,11 +12,16 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
   }
 
   private cellInput = (e: any) => {
+    // prevent default behavior to prevent input field getting populated
+    e.preventDefault();
+    let i: number = +e.key;
     if (this.props.selectedCellName !== undefined) {
-      if (e.keyCode > 48 && e.keyCode < 58) {
-        this.props.cellInput(+e.key); // digits 1 throuhg 9
-      } else if (e.keyCode === 8 || e.keyCode === 32 || e.keyCode === 46) {
-        this.props.cellInput(undefined); // backspace, space and delete
+      if (i > 0 && i < 10) {
+        this.props.cellInput(i); // digits 1 throuhg 9
+      } else {
+        if (e.keyCode === 8 || e.keyCode === 32 || e.keyCode === 46) {
+          this.props.cellInput(undefined); // backspace, space and delete
+        }
       }
     }
   }
@@ -25,6 +30,14 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
     this.props.cellName === this.props.selectedCellName
       ? this.props.selectCell(undefined)
       : this.props.selectCell(this.props.cellName);
+
+    // set focus on hidden input field to trigger ipad keyboard to pop up
+    let element: HTMLElement | null = document.getElementById(
+      this.props.cellName
+    );
+    if (element !== null) {
+      element.focus();
+    }
   }
 
   public render(): JSX.Element {
@@ -46,18 +59,15 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
           }
         >
           <rect x="0" y="0" width={this.props.size} height={this.props.size} />
-          {/* <foreignObject x="0" y="0" width={this.props.size} height={this.props.size}>
-            <body style={{width: "100%", height: "100%"}}>
-              <form style={{width: "100%", height: "100%"}}>
-                <input style={{width: "100%", height: "100%", display: "table-cell", fontSize: (this.props.size * 0.65), horizontalAlign: "center", color: "white"}} type="text" />
-              </form>
-            </body>
-          </foreignObject> */}
+          <foreignObject>
+            <input id={this.props.cellName} type={"number"} />
+          </foreignObject>
           <text
+            tabIndex={0}
             x={this.props.size * 0.35}
             y={this.props.size * 0.7}
             fontSize={this.props.size * 0.65}
-          >          
+          >
             {this.props.cellValue}
           </text>
           <text
@@ -83,7 +93,8 @@ function mapStateToProps(state: ISudokuState, ownProps: ICellUIProps): any {
 
 function mapDispatchToProps(dispatch: any): any {
   return {
-    selectCell: (cellName: string | undefined) => dispatch(selectCell(cellName)),
+    selectCell: (cellName: string | undefined) =>
+      dispatch(selectCell(cellName)),
     cellInput: (value: number | undefined) => dispatch(cellInput(value))
   };
 }
