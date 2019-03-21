@@ -13,6 +13,24 @@ export class Sudoku {
         this.printClusters();
     }
 
+    public ProcessInput(cellName: string, inputValue: number | undefined): void {
+        let newCell: Cell = this.cells[cellName];
+        newCell.value = inputValue;
+        if (inputValue !== undefined) {
+          // newCell.options = [];
+          // todo: invalidate options with this payload for all cells that belong to the clusters that this cell is in
+
+          let affectedClusters: any = Object.keys(this.clusters)
+            .filter(key => this.clusters[key].some((c: { name: string; })  => c.name === cellName))
+            .map((key: string) => this.clusters[key]);
+          let affectedCells: Cell[] = [].concat.apply([], affectedClusters);
+          affectedCells.forEach(c => c.invalidateOption(inputValue));
+        } else {
+          // todo: recalculate options for this cell
+          // todo: recalculate options for all cells that belong to the clusters that this cell is in
+        }
+    }
+
     private createCells = () => {
         Array.from(cols).forEach(c => Array.from(rows).forEach(r => this.cells[`${c}${r}`] = new Cell(`${c}${r}`, undefined )));
     }

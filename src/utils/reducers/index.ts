@@ -14,15 +14,9 @@ function rootReducer(state: ISudokuState, action: IAction): ISudokuState {
 
   if (action.type === CELL_INPUT) {
     let newState: ISudokuState = Object.assign({}, state);
-    let newCell: Cell = newState.game.cells[newState.selectedCellName];
-    newCell.value = action.payload;
-    if (action.payload !== undefined) {
-      newCell.options = undefined;
-      // todo: invalidate options with this payload for all cells that belong to the clusters that this cell is in
-    } else {
-      // todo: recalculate options for this cell
-      // todo: recalculate options for all cells that belong to the clusters that this cell is in
-    }
+    let cellName: string = newState.selectedCellName;
+    let inputValue: number | undefined = action.payload;
+    newState.game.ProcessInput(cellName, inputValue);
     return newState;
   }
 
