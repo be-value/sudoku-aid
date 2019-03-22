@@ -21,37 +21,42 @@ export class Sudoku {
     public processInput(cellName: string, inputValue: number | undefined): void {
         let newCell: Cell = this.cells[cellName];
         newCell.value = inputValue;
+
+        this.recalculateGame(cellName);
     }
 
-    public recalculateOptions(cellName: string): void {
-        let affectedClusters = this.affectedClusters(cellName);
-        affectedClusters.forEach(cluster => {
-            let filledValues = cluster.map(c => c.value).filter(c => c !== undefined) as number[];
-            cluster.forEach(c => c.invalidateOptions(filledValues))
-        })
+    private recalculateGame(cellName: string): void {
+        this.affectedCells(this.affectedClusters(cellName)).forEach(cell => {
+            let affectedCells: Cell[] = this.affectedCells(this.affectedClusters(cell.name));
+            let filledValues: number[] = this.filledValues(affectedCells);
+            let duplicateValues: number[] = this.duplicateValues(filledValues);
+
+            cell.invalidateOptions(this.uniqueValues(filledValues));
+            cell.hasValidValue = cell.value === undefined || !duplicateValues.includes(cell.value as number);
+        });
     }
 
-    public validateCells(cellName: string): void {
-        errorlet affectedClusters = this.affectedClusters(cellName);
-        // First set all cells to valid
-        affectedClusters.forEach(cluster => {
-            cluster.forEach(cell => cell.hasValidValue = true)
-        })
-        // Next calculate invalidation
-        affectedClusters.forEach(cluster => {
-            let filledValues = cluster.map(c => c.value).filter(c => c !== undefined) as number[];
-            let duplicateValues = this.findDuplicateValues(filledValues);
-            cluster.forEach(c => c.hasValidValue = c.hasValidValue && (c.value === undefined || !duplicateValues.includes(c.value as number)))
-        })
+    private affectedCells(clusters: Cell[][]): Cell[] {
+        var cells: Set<Cell> = new Set(Array<Cell>().concat(...clusters));
+        return Array.from(cells);
     }
 
-    private findDuplicateValues(values: number[]): number[] {
-        var sorted = values.slice().sort((a, b) => a - b); 
-        // JS by default uses a crappy string compare - so use sorting method
+    private filledValues(cells: Cell[]): number[] {
+        return cells.filter(c1 => c1.value !== undefined).map(c2 => c2.value) as number[];
+    }
+
+    private uniqueValues(values: number[]): number[] {
+        var uniqueSet: Set<number> = new Set(values);
+        return Array.from(uniqueSet);
+    }
+
+    private duplicateValues(values: number[]): number[] {
+        var sorted: number[] = values.slice().sort((a, b) => a - b);
+        // js by default uses a crappy string compare - so use sorting method
         // (we use slice to clone the array so the original array won't be modified)
         let results: number[] = new Array<number>();
-        for (var i = 0; i < sorted.length - 1; i++) {
-            if (sorted[i + 1] == sorted[i] &&
+        for (let i: number = 0; i < sorted.length - 1; i++) {
+            if (sorted[i + 1] === sorted[i] &&
                 !results.includes(sorted[i])) {
                 results.push(sorted[i]);
             }

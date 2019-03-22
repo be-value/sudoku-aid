@@ -4,7 +4,7 @@ export interface ICellUIProps {
   x: number;
   y: number;
   cellName: string;
-  
+
   // connected properties
   cellValue?: number;
   cellOptions?: any;
@@ -13,5 +13,5 @@ export interface ICellUIProps {
 
   // dispatching methods
   selectCell?: any;
-  cellInput?: any;  
+  cellInput?: any;
 }

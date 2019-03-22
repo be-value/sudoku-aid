@@ -5,7 +5,7 @@ import { ISudokuState } from "../store/ISudokuState";
 
 function rootReducer(state: ISudokuState, action: IAction): ISudokuState {
 
-  // Selecting a cell for input (or deselecting a cel when that cell was selected)
+  // selecting a cell for input (or deselecting a cel when that cell was selected)
   if (action.type === SELECT_CELL) {
     let newState: ISudokuState = Object.assign({}, state);
     newState.selectedCellName = action.payload;
@@ -19,9 +19,7 @@ function rootReducer(state: ISudokuState, action: IAction): ISudokuState {
     let inputValue: number | undefined = action.payload;
 
     newState.game.processInput(cellName, inputValue);
-    newState.game.recalculateOptions(cellName);
-    newState.game.validateCells(cellName);
-    
+
     return newState;
   }
 
