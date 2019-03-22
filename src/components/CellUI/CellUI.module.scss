@@ -20,6 +20,28 @@
   }
 }
 
+.invalidCell {
+  // Plain an natural Cell css
+  fill: white;
+
+  rect { 
+    fill: inherit;
+    stroke: red;
+    stroke-width: 1pt;
+    cursor: inherit;    
+  }
+  
+  text {
+    fill: red;
+  }
+
+  // Hovering over Cell css
+  &:hover {
+    fill: lightgray;
+    cursor: pointer;
+  }
+}
+
 .selectedCell {
   // Plain an natural Cell css
   fill: lightblue;
@@ -37,7 +59,29 @@
 
   // Hovering over Cell css
   &:hover {
-    fill: lightgray;
+    fill: lightblue;
+    cursor: pointer;
+  }
+}
+
+.invalidSelectedCell {
+  // Plain an natural Cell css
+  fill: lightblue;
+
+  rect { 
+    fill: inherit;
+    stroke: red;
+    stroke-width: 1pt;
+    cursor: inherit;
+  }
+  
+  text {
+    fill: red;
+  }
+
+  // Hovering over Cell css
+  &:hover {
+    fill: lightblue;
     cursor: pointer;
   }
 }

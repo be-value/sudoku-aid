@@ -33,10 +33,15 @@ export class Sudoku {
 
     public validateCells(cellName: string): void {
         let affectedClusters = this.affectedClusters(cellName);
+        // First set all cells to valid
+        affectedClusters.forEach(cluster => {
+            cluster.forEach(cell => cell.hasValidValue = true)
+        })
+        // Next calculate invalidation
         affectedClusters.forEach(cluster => {
             let filledValues = cluster.map(c => c.value).filter(c => c !== undefined) as number[];
             let duplicateValues = this.findDuplicateValues(filledValues);
-            cluster.forEach(c => c.hasValidValue = c.value === undefined || !duplicateValues.includes(c.value)            )
+            cluster.forEach(c => c.hasValidValue = c.hasValidValue && (c.value === undefined || !duplicateValues.includes(c.value as number)))
         })
     }
 

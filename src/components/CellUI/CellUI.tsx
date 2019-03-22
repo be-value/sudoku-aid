@@ -54,8 +54,12 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
         <g
           className={
             this.props.isCellSelected
-              ? styles.selectedCell
-              : styles.cell
+              ? (this.props.hasValidValue
+                ? styles.selectedCell
+                : styles.invalidSelectedCell)
+              : (this.props.hasValidValue
+                ? styles.cell
+                : styles.invalidCell)
           }
         >
           <rect x="0" y="0" width={this.props.size} height={this.props.size} />
