@@ -8,7 +8,8 @@ export interface ICellUIProps {
   // connected properties
   cellValue?: number;
   cellOptions?: any;
-  isCellSelected? : boolean;
+  isCellSelected?: boolean;
+  hasValidValue?: boolean;
 
   // dispatching methods
   selectCell?: any;

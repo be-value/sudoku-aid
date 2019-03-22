@@ -18,8 +18,9 @@ function rootReducer(state: ISudokuState, action: IAction): ISudokuState {
     let cellName: string = newState.selectedCellName;
     let inputValue: number | undefined = action.payload;
 
-    newState.game.ProcessInput(cellName, inputValue);
-    newState.game.RecalculateOptions(cellName);
+    newState.game.processInput(cellName, inputValue);
+    newState.game.recalculateOptions(cellName);
+    newState.game.validateCells(cellName);
     
     return newState;
   }

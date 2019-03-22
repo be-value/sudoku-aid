@@ -1,4 +1,5 @@
 import { Cell } from "./Cell";
+import { array } from "prop-types";
 
 const cols: string = "abcdefghi";
 const rows: string = "123456789";
@@ -17,12 +18,12 @@ export class Sudoku {
         return this.cells[cellName];
     }
 
-    public ProcessInput(cellName: string, inputValue: number | undefined): void {
+    public processInput(cellName: string, inputValue: number | undefined): void {
         let newCell: Cell = this.cells[cellName];
         newCell.value = inputValue;
     }
 
-    public RecalculateOptions(cellName: string): void {
+    public recalculateOptions(cellName: string): void {
         let affectedClusters = this.affectedClusters(cellName);
         affectedClusters.forEach(cluster => {
             let filledValues = cluster.map(c => c.value).filter(c => c !== undefined) as number[];
@@ -30,11 +31,34 @@ export class Sudoku {
         })
     }
 
+    public validateCells(cellName: string): void {
+        let affectedClusters = this.affectedClusters(cellName);
+        affectedClusters.forEach(cluster => {
+            let filledValues = cluster.map(c => c.value).filter(c => c !== undefined) as number[];
+            let duplicateValues = this.findDuplicateValues(filledValues);
+            cluster.forEach(c => c.hasValidValue = c.value === undefined || !duplicateValues.includes(c.value)            )
+        })
+    }
+
+    private findDuplicateValues(values: number[]): number[] {
+        var sorted = values.slice().sort((a, b) => a - b); 
+        // JS by default uses a crappy string compare - so use sorting method
+        // (we use slice to clone the array so the original array won't be modified)
+        let results: number[] = new Array<number>();
+        for (var i = 0; i < sorted.length - 1; i++) {
+            if (sorted[i + 1] == sorted[i] &&
+                !results.includes(sorted[i])) {
+                results.push(sorted[i]);
+            }
+        }
+        return results;
+    }
+
     private affectedClusters(cellName: string): Cell[][] {
         return Object.keys(this.clusters) // all cluster names
-        .filter(key => this.clusters[key]
-            .some((c: { name: string; }) => c.name === cellName)) // all cluster names that contain our cell
-        .map((key: string) => this.clusters[key]); // all clusters that contain our cell
+            .filter(key => this.clusters[key]
+                .some((c: { name: string; }) => c.name === cellName)) // all cluster names that contain our cell
+            .map((key: string) => this.clusters[key]); // all clusters that contain our cell
     }
 
     private createCells = () => {
