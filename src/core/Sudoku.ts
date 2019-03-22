@@ -4,8 +4,8 @@ const cols: string = "abcdefghi";
 const rows: string = "123456789";
 
 export class Sudoku {
-    public cells: any = {};
-    public clusters: any = {};
+    private cells: any = {};
+    private clusters: any = {};
 
     constructor() {
         this.createCells();
@@ -13,26 +13,32 @@ export class Sudoku {
         this.printClusters();
     }
 
+    public getCell(cellName: string): Cell {
+        return this.cells[cellName];
+    }
+
     public ProcessInput(cellName: string, inputValue: number | undefined): void {
         let newCell: Cell = this.cells[cellName];
         newCell.value = inputValue;
-        if (inputValue !== undefined) {
-          // newCell.options = [];
-          // todo: invalidate options with this payload for all cells that belong to the clusters that this cell is in
+    }
 
-          let affectedClusters: any = Object.keys(this.clusters)
-            .filter(key => this.clusters[key].some((c: { name: string; })  => c.name === cellName))
-            .map((key: string) => this.clusters[key]);
-          let affectedCells: Cell[] = [].concat.apply([], affectedClusters);
-          affectedCells.forEach(c => c.invalidateOption(inputValue));
-        } else {
-          // todo: recalculate options for this cell
-          // todo: recalculate options for all cells that belong to the clusters that this cell is in
-        }
+    public RecalculateOptions(cellName: string): void {
+        let affectedClusters = this.affectedClusters(cellName);
+        affectedClusters.forEach(cluster => {
+            let filledValues = cluster.map(c => c.value).filter(c => c !== undefined) as number[];
+            cluster.forEach(c => c.invalidateOptions(filledValues))
+        })
+    }
+
+    private affectedClusters(cellName: string): Cell[][] {
+        return Object.keys(this.clusters) // all cluster names
+        .filter(key => this.clusters[key]
+            .some((c: { name: string; }) => c.name === cellName)) // all cluster names that contain our cell
+        .map((key: string) => this.clusters[key]); // all clusters that contain our cell
     }
 
     private createCells = () => {
-        Array.from(cols).forEach(c => Array.from(rows).forEach(r => this.cells[`${c}${r}`] = new Cell(`${c}${r}`, undefined )));
+        Array.from(cols).forEach(c => Array.from(rows).forEach(r => this.cells[`${c}${r}`] = new Cell(`${c}${r}`, undefined)));
     }
 
     private createClusters = () => {
@@ -50,7 +56,7 @@ export class Sudoku {
     }
 
     private createCluster = (clusterName: string, colsStr: string, rowsStr: string) => {
-        let keys : Array<string> = new Array<string>();
+        let keys: Array<string> = new Array<string>();
         Array.from(colsStr).forEach(col => Array.from(rowsStr).forEach(row => keys.push(`${col}${row}`)));
         this.clusters[clusterName] = keys.map(key => this.cells[key]);
     }
@@ -59,7 +65,7 @@ export class Sudoku {
         // tslint:disable-next-line:forin
         for (var clusterName in this.clusters) {
             var cluster: any = this.clusters[clusterName];
-            var cellNames : Array<string> = new Array<string>();
+            var cellNames: Array<string> = new Array<string>();
             for (var cell of cluster) {
                 cellNames.push(cell.name);
             }

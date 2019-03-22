@@ -86,8 +86,8 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
 function mapStateToProps(state: ISudokuState, ownProps: ICellUIProps): any {
   return {
     selectedCellName: state.selectedCellName,
-    cellValue: state.game.cells[ownProps.cellName].value,
-    cellOptions: state.game.cells[ownProps.cellName].options
+    cellValue: state.game.getCell(ownProps.cellName).value,
+    cellOptions: state.game.getCell(ownProps.cellName).options
   };
 }
 

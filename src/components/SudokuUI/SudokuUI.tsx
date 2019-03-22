@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import CellUI from "../CellUI/CellUI";
-import { cellInput } from "../../utils/actions";
 import { ISudokuUIUIProps } from "./ISudokuUIProps";
 import { ISudokuUIState } from "./ISudokuUIState";
 
