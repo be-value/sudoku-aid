@@ -15,7 +15,7 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
     // prevent default behavior to prevent input field getting populated
     e.preventDefault();
     let i: number = +e.key;
-    if (this.props.selectedCellName !== undefined) {
+    if (this.props.isCellSelected) {
       if (i > 0 && i < 10) {
         this.props.cellInput(i); // digits 1 throuhg 9
       } else {
@@ -27,7 +27,7 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
   }
 
   private selectMe = () => {
-    this.props.cellName === this.props.selectedCellName
+    this.props.isCellSelected
       ? this.props.selectCell(undefined)
       : this.props.selectCell(this.props.cellName);
 
@@ -53,7 +53,7 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
       >
         <g
           className={
-            this.props.cellName === this.props.selectedCellName
+            this.props.isCellSelected
               ? styles.selectedCell
               : styles.cell
           }
@@ -85,7 +85,7 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
 
 function mapStateToProps(state: ISudokuState, ownProps: ICellUIProps): any {
   return {
-    selectedCellName: state.selectedCellName,
+    isCellSelected: ownProps.cellName === state.selectedCellName,
     cellValue: state.game.getCell(ownProps.cellName).value,
     cellOptions: state.game.getCell(ownProps.cellName).options
   };
