@@ -1,6 +1,4 @@
 import { Cell } from "./Cell";
-import { array } from "prop-types";
-
 const cols: string = "abcdefghi";
 const rows: string = "123456789";
 
@@ -11,21 +9,68 @@ export class Sudoku {
     constructor() {
         this.createCells();
         this.createClusters();
-        this.printClusters();
     }
 
-    public getCell(cellName: string): Cell {
+    public getCell = (cellName: string) => {
         return this.cells[cellName];
     }
 
-    public processInput(cellName: string, inputValue: number | undefined): void {
+    public processInput = (cellName: string, inputValue: number | undefined) => {
         let newCell: Cell = this.cells[cellName];
         newCell.value = inputValue;
 
         this.recalculateGame(cellName);
     }
 
-    private recalculateGame(cellName: string): void {
+    public nextCellName = (currentCellName: string, keyCode: number) => {
+        let name: string | undefined = undefined;
+        switch (keyCode) {
+            case 35:
+                name = this.clusters[currentCellName[1]][8].name;
+                break;
+            case 36:
+                name = this.clusters[currentCellName[1]][0].name;
+                break;
+            case 37: {
+                let cluster: Cell[] = this.clusters[currentCellName[1]];
+                let currentCell: Cell = cluster.find((c: Cell) => c.name === currentCellName) as Cell;
+                let idx: number = cluster.indexOf(currentCell)-1;
+                name = idx === -1 ? cluster[8].name : cluster[idx].name;
+                break;
+            }
+            case 39: {
+                let cluster: Cell[] = this.clusters[currentCellName[1]];
+                let currentCell: Cell = cluster.find((c: Cell) => c.name === currentCellName) as Cell;
+                let idx: number = cluster.indexOf(currentCell)+1;
+                name = idx === 9 ? cluster[0].name : cluster[idx].name;
+                break;
+            }
+            case 33:
+                name = this.clusters[currentCellName[0]][0].name;
+                break;
+            case 34:
+                name = this.clusters[currentCellName[0]][8].name;
+                break;
+            case 38: {
+                let cluster: Cell[] = this.clusters[currentCellName[0]];
+                let currentCell: Cell = cluster.find((c: Cell) => c.name === currentCellName) as Cell;
+                let idx: number = cluster.indexOf(currentCell)-1;
+                name = idx === -1 ? cluster[8].name : cluster[idx].name;
+                break;
+            }
+            case 40: {
+                let cluster: Cell[] = this.clusters[currentCellName[0]];
+                let currentCell: Cell = cluster.find((c: Cell) => c.name === currentCellName) as Cell;
+                let idx: number = cluster.indexOf(currentCell)+1;
+                name = idx === 9 ? cluster[0].name : cluster[idx].name;
+                break;
+            }
+        }
+
+        return name;
+    }
+
+    private recalculateGame = (cellName: string) => {
         this.affectedCells(this.affectedClusters(cellName)).forEach(cell => {
             let affectedCells: Cell[] = this.affectedCells(this.affectedClusters(cell.name));
             let filledValues: number[] = this.filledValues(affectedCells);
@@ -36,21 +81,21 @@ export class Sudoku {
         });
     }
 
-    private affectedCells(clusters: Cell[][]): Cell[] {
+    private affectedCells = (clusters: Cell[][]) => {
         var cells: Set<Cell> = new Set(Array<Cell>().concat(...clusters));
         return Array.from(cells);
     }
 
-    private filledValues(cells: Cell[]): number[] {
+    private filledValues = (cells: Cell[]) => {
         return cells.filter(c1 => c1.value !== undefined).map(c2 => c2.value) as number[];
     }
 
-    private uniqueValues(values: number[]): number[] {
+    private uniqueValues = (values: number[]) => {
         var uniqueSet: Set<number> = new Set(values);
         return Array.from(uniqueSet);
     }
 
-    private duplicateValues(values: number[]): number[] {
+    private duplicateValues = (values: number[]) => {
         var sorted: number[] = values.slice().sort((a, b) => a - b);
         // js by default uses a crappy string compare - so use sorting method
         // (we use slice to clone the array so the original array won't be modified)
@@ -64,7 +109,7 @@ export class Sudoku {
         return results;
     }
 
-    private affectedClusters(cellName: string): Cell[][] {
+    private affectedClusters = (cellName: string) => {
         return Object.keys(this.clusters) // all cluster names
             .filter(key => this.clusters[key]
                 .some((c: { name: string; }) => c.name === cellName)) // all cluster names that contain our cell
@@ -98,13 +143,17 @@ export class Sudoku {
     private printClusters = () => {
         // tslint:disable-next-line:forin
         for (var clusterName in this.clusters) {
-            var cluster: any = this.clusters[clusterName];
+            this.printCluster(clusterName);
+        }
+    }
+
+    private printCluster = (clusterName: string) => {
+        var cluster: any = this.clusters[clusterName];
             var cellNames: Array<string> = new Array<string>();
             for (var cell of cluster) {
                 cellNames.push(cell.name);
             }
             // tslint:disable-next-line:no-console
             console.debug(`${clusterName} = [${cellNames.join()}]`);
-        }
     }
 }

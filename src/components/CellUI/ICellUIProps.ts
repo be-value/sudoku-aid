@@ -14,4 +14,5 @@ export interface ICellUIProps {
   // dispatching methods
   selectCell?: any;
   cellInput?: any;
+  nextCellName?: any;
 }
