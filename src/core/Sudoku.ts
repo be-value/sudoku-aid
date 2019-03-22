@@ -32,7 +32,7 @@ export class Sudoku {
     }
 
     public validateCells(cellName: string): void {
-        let affectedClusters = this.affectedClusters(cellName);
+        errorlet affectedClusters = this.affectedClusters(cellName);
         // First set all cells to valid
         affectedClusters.forEach(cluster => {
             cluster.forEach(cell => cell.hasValidValue = true)
