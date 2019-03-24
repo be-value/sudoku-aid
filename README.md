@@ -1,5 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Current Status
+| Status | master | develop |
+| ------ | ------ | ------- |
+||[![Build status](https://dev.azure.com/be-value/Sudoku%20Aid/_apis/build/status/Sudoku%20Aid-CI?branchName=master)](https://dev.azure.com/be-value/Sudoku%20Aid/_build/latest?definitionId=15)|[![Build status](https://dev.azure.com/be-value/Sudoku%20Aid/_apis/build/status/Sudoku%20Aid-CI?branchName=develop)](https://dev.azure.com/be-value/Sudoku%20Aid/_build/latest?definitionId=15)|
+
 ## Available Scripts
 
 In the project directory, you can run:
