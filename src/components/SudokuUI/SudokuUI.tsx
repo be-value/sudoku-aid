@@ -45,7 +45,8 @@ class SudokuUI extends Component<ISudokuUIUIProps | any, ISudokuUIState> {
 
   render(): JSX.Element {
     return (
-      <div style={{ textAlign: "center" }} tabIndex={0}>
+      <div>
+      <div style={{ float: "left"}} tabIndex={0}>
         <svg style={{ width: this.myWidth(), height: this.myWidth() }}>
           <rect x="0"
                 y="0"
@@ -147,6 +148,11 @@ class SudokuUI extends Component<ISudokuUIUIProps | any, ISudokuUIState> {
           <CellUI size={this.cellWidth()} x={this.pos(7)} y={this.pos(8)} cellName={"h9"}/>
           <CellUI size={this.cellWidth()} x={this.pos(8)} y={this.pos(8)} cellName={"i9"}/>
         </svg>
+      </div>
+      <div style={{ float: "left", marginLeft: "30px"}}>
+        <h1>This is sudoku</h1>
+        <div><span>rest here</span></div>
+      </div>
       </div>
     );
   }
