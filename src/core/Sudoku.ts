@@ -135,6 +135,10 @@ export class Sudoku {
         this.createCluster("VII", this.cols.substring(0, 3), this.rows.substring(6));
         this.createCluster("VIII", this.cols.substring(3, 6), this.rows.substring(6));
         this.createCluster("IX", this.cols.substring(6), this.rows.substring(6));
+        // this.clusters.X = ["a1", "b2", "c3", "d4", "e5", "f6", "g7", "h8", "i9"].map(key => this.cells[key]);
+        // this.clusters.X.forEach((c: Cell) => c.highlight = true);
+        // this.clusters.Y = ["a9", "b8", "c7", "d6", "e5", "f4", "g3", "h2", "i1"].map(key => this.cells[key]);
+        // this.clusters.Y.forEach((c: Cell) => c.highlight = true);
     }
 
     private createCluster = (clusterName: string, colsStr: string, rowsStr: string) => {
