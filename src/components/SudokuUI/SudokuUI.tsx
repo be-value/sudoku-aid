@@ -3,12 +3,16 @@ import Switch from "react-switch";
 import CellUI from "../CellUI/CellUI";
 import { ISudokuUIUIProps } from "./ISudokuUIProps";
 import { ISudokuUIState } from "./ISudokuUIState";
+import { toggleViewCellOptions } from "../../utils/actions";
+import { connect } from "react-redux";
+import { ISudokuState } from "../../utils/store/ISudokuState";
 
 class SudokuUI extends Component<ISudokuUIUIProps | any, ISudokuUIState> {
   constructor(props: any) {
     super(props);
     this.state = { width: window.innerWidth, height: window.innerHeight };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    this.handleViewCellOptionsChanged = this.handleViewCellOptionsChanged.bind(this);
   }
 
   private readonly lineWidth: number = 3;
@@ -42,6 +46,10 @@ class SudokuUI extends Component<ISudokuUIUIProps | any, ISudokuUIState> {
   linePos = (posNo: number) => {
     let factor: number = posNo < 1 ? 0 : posNo < 2 ? 3 : 6;
     return factor * this.cellWidth() + (posNo + 0.5) * this.lineWidth;
+  }
+
+  handleViewCellOptionsChanged = (checked: boolean) => {
+    this.props.toggleViewCellOptions(checked);
   }
 
   render(): JSX.Element {
@@ -153,12 +161,8 @@ class SudokuUI extends Component<ISudokuUIUIProps | any, ISudokuUIState> {
         <div style={{ float: "left", marginLeft: "30px"}}>
           <h1>Sudoku aid</h1>
           <div style={{ marginBottom: "15px"}}>
-            <Switch onChange={() => {}} checked={true}></Switch>
+            <Switch onChange={this.handleViewCellOptionsChanged} checked={this.props.viewCellOptions}></Switch>
             <span style={{ marginLeft: "15px"}}>Show cell options</span>
-          </div>
-          <div style={{ marginBottom: "15px"}}>
-            <Switch onChange={() => {}} checked={true}></Switch>
-            <span style={{ marginLeft: "15px"}}>Cross clusters</span>
           </div>
         </div>
       </div>
@@ -166,4 +170,20 @@ class SudokuUI extends Component<ISudokuUIUIProps | any, ISudokuUIState> {
   }
 }
 
-export default SudokuUI;
+function mapStateToProps(state: ISudokuState): any {
+  return {
+    viewCellOptions: state.viewCellOptions
+  };
+}
+
+function mapDispatchToProps(dispatch: any): any {
+  return {
+    toggleViewCellOptions: (show: boolean) =>
+      dispatch(toggleViewCellOptions(show))
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SudokuUI);
