@@ -1,10 +1,11 @@
 import { Cell } from "./Cell";
-const cols: string = "abcdefghi";
-const rows: string = "123456789";
 
 export class Sudoku {
     private cells: any = {};
     private clusters: any = {};
+    private readonly cols: string = "abcdefghi";
+    private readonly rows: string = "123456789";
+    private readonly options: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     constructor() {
         this.createCells();
@@ -117,21 +118,23 @@ export class Sudoku {
     }
 
     private createCells = () => {
-        Array.from(cols).forEach(c => Array.from(rows).forEach(r => this.cells[`${c}${r}`] = new Cell(`${c}${r}`, undefined)));
+        Array.from(this.cols)
+           .forEach(c => Array.from(this.rows)
+           .forEach(r => this.cells[`${c}${r}`] = new Cell(`${c}${r}`, this.options)));
     }
 
     private createClusters = () => {
-        Array.from(cols).forEach(c => this.createCluster(c, c, rows));
-        Array.from(rows).forEach(r => this.createCluster(r, cols, r));
-        this.createCluster("I", cols.substring(0, 3), rows.substring(0, 3));
-        this.createCluster("II", cols.substring(3, 6), rows.substring(0, 3));
-        this.createCluster("III", cols.substring(6), rows.substring(0, 3));
-        this.createCluster("IV", cols.substring(0, 3), rows.substring(3, 6));
-        this.createCluster("V", cols.substring(3, 6), rows.substring(3, 6));
-        this.createCluster("VI", cols.substring(6), rows.substring(3, 6));
-        this.createCluster("VII", cols.substring(0, 3), rows.substring(6));
-        this.createCluster("VIII", cols.substring(3, 6), rows.substring(6));
-        this.createCluster("IX", cols.substring(6), rows.substring(6));
+        Array.from(this.cols).forEach(c => this.createCluster(c, c, this.rows));
+        Array.from(this.rows).forEach(r => this.createCluster(r, this.cols, r));
+        this.createCluster("I", this.cols.substring(0, 3), this.rows.substring(0, 3));
+        this.createCluster("II", this.cols.substring(3, 6), this.rows.substring(0, 3));
+        this.createCluster("III", this.cols.substring(6), this.rows.substring(0, 3));
+        this.createCluster("IV", this.cols.substring(0, 3), this.rows.substring(3, 6));
+        this.createCluster("V", this.cols.substring(3, 6), this.rows.substring(3, 6));
+        this.createCluster("VI", this.cols.substring(6), this.rows.substring(3, 6));
+        this.createCluster("VII", this.cols.substring(0, 3), this.rows.substring(6));
+        this.createCluster("VIII", this.cols.substring(3, 6), this.rows.substring(6));
+        this.createCluster("IX", this.cols.substring(6), this.rows.substring(6));
     }
 
     private createCluster = (clusterName: string, colsStr: string, rowsStr: string) => {
