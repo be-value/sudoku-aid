@@ -1,9 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Sudoku Aid
 
-## Current Status
+This is a pet project for learning and showcasing React while delivering a real and usable functionality to the public.
+The aim of this application is NOT to solve sudoku puzzles (although it could) but to help any sudoku fetishists controlling their frustrations about getting stuck at some point....
+
+Try the application on: [Sudoku Web](https://sudokuweb.z6.web.core.windows.net)
+
+The application uses Scalable Vector Graphics (svg) to display the sudoku utilizing maximum screen sizes.
+
+## Used technologies
+1. VS Code 
+    * TypeScript
+    * React
+    * Redux
+2. GitFlow branching/merging process
+3. GitHub repository
+4. Azure Devops
+    * GitHub integration
+    * Boards
+    * Build pipeline
+    * Release pipeline
+5. Azure
+    * Azure Static website (serving content from storage account)
+
+
+## Current development status
 | master | develop |
 | ------ | ------- |
 |[![Build status](https://dev.azure.com/be-value/Sudoku%20Aid/_apis/build/status/Sudoku%20Aid-CI?branchName=master)](https://dev.azure.com/be-value/Sudoku%20Aid/_build/latest?definitionId=15&branchName=master)|[![Build status](https://dev.azure.com/be-value/Sudoku%20Aid/_apis/build/status/Sudoku%20Aid-CI?branchName=develop)](https://dev.azure.com/be-value/Sudoku%20Aid/_build/latest?definitionId=15&branchName=develop)|
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
