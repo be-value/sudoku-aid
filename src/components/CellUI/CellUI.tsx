@@ -89,7 +89,7 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
           >
             {this.props.cellValue}
           </text>
-          { this.props.cellValue === undefined && <text
+          { this.props.viewCellOptions && this.props.cellValue === undefined && <text
             x={this.props.size * 0.05}
             y={this.props.size * 0.95}
             fontSize={this.props.size * 0.15}
@@ -108,7 +108,8 @@ function mapStateToProps(state: ISudokuState, ownProps: ICellUIProps): any {
     hasValidValue: state.game.getCell(ownProps.cellName).hasValidValue,
     cellValue: state.game.getCell(ownProps.cellName).value,
     cellOptions: state.game.getCell(ownProps.cellName).options,
-    nextCellName: state.game.nextCellName
+    nextCellName: state.game.nextCellName,
+    viewCellOptions: state.viewCellOptions
   };
 }
 

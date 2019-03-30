@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 import { IAction } from "../actions/IAction";
-import { SELECT_CELL, CELL_INPUT } from "../actions/constants";
+import { SELECT_CELL, CELL_INPUT, TOGGLE_VIEW_CELL_OPTIONS } from "../actions/constants";
 import { ISudokuState } from "../store/ISudokuState";
 
 function rootReducer(state: ISudokuState, action: IAction): ISudokuState {
@@ -21,6 +21,11 @@ function rootReducer(state: ISudokuState, action: IAction): ISudokuState {
     newState.game.processInput(cellName, inputValue);
 
     return newState;
+  }
+
+  // toggling the visibility of the cell options
+  if (action.type === TOGGLE_VIEW_CELL_OPTIONS) {
+    return Object.assign({}, state, { viewCellOptions: action.payload });
   }
 
   return state;
