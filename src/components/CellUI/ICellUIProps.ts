@@ -4,6 +4,7 @@ export interface ICellUIProps {
   x: number;
   y: number;
   cellName: string;
+  highlight: boolean;
 
   // connected properties
   cellValue?: number;

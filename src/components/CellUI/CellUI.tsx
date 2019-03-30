@@ -9,7 +9,13 @@ import { ISudokuState } from "../../utils/store/ISudokuState";
 class CellUI extends React.Component<ICellUIProps, ICellUIState> {
   constructor(props: ICellUIProps) {
     super(props);
+    this.state = { classes: this.classNames(this.props)};
   }
+
+  componentWillReceiveProps(nextProps: ICellUIProps): void {
+    this.setState( {classes: this.classNames(nextProps)});
+  }
+
 
   private cellInput = (e: any) => {
     // prevent default behavior to prevent input field getting populated
@@ -55,6 +61,19 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
     }
   }
 
+  private classNames = (props: ICellUIProps) => {
+    let classes: any = {
+      [styles.cell]: true,
+      [styles.bkWhite]: !props.isCellSelected && !props.highlight,
+      [styles.bkLightGray]: !props.isCellSelected && props.highlight,
+      [styles.bkLightBlue]: props.isCellSelected,
+      [styles.fgBlack]: !props.isCellSelected && props.hasValidValue,
+      [styles.fgBlue]: props.isCellSelected && props.hasValidValue,
+      [styles.fgRed]: !props.hasValidValue
+    };
+    return Object.entries(classes).filter(([key, value]) => value).map(([key, value]) => key).join(" ");
+  }
+
   public render(): JSX.Element {
     return (
       <svg
@@ -66,17 +85,7 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
         onKeyDown={this.cellInput}
         tabIndex={0}
       >
-        <g
-          className={
-            this.props.isCellSelected
-              ? (this.props.hasValidValue
-                ? styles.selectedCell
-                : styles.invalidSelectedCell)
-              : (this.props.hasValidValue
-                ? styles.cell
-                : styles.invalidCell)
-          }
-        >
+        <g className={this.state.classes}>
           <rect x="0" y="0" width={this.props.size} height={this.props.size} />
           <foreignObject>
             <input id={this.props.cellName} type={"number"} />
@@ -108,6 +117,7 @@ function mapStateToProps(state: ISudokuState, ownProps: ICellUIProps): any {
     hasValidValue: state.game.getCell(ownProps.cellName).hasValidValue,
     cellValue: state.game.getCell(ownProps.cellName).value,
     cellOptions: state.game.getCell(ownProps.cellName).options,
+    highlight: state.game.getCell(ownProps.cellName).highlight,
     nextCellName: state.game.nextCellName,
     viewCellOptions: state.viewCellOptions
   };
