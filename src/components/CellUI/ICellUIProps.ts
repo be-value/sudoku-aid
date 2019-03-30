@@ -4,7 +4,6 @@ export interface ICellUIProps {
   x: number;
   y: number;
   cellName: string;
-  highlight: boolean;
 
   // connected properties
   cellValue?: number;
@@ -12,6 +11,7 @@ export interface ICellUIProps {
   isCellSelected?: boolean;
   hasValidValue?: boolean;
   viewCellOptions?: boolean;
+  highlight?: boolean;
 
   // dispatching methods
   selectCell?: any;
