@@ -14,18 +14,23 @@ export class Cell {
   // an indicator for visibility in cross clusters
   public highlight: boolean;
 
+  // the complete list of all the possible options
+  private readonly allOptions: Array<number>;
+
   constructor(
     name: string,
     options: Array<number>
   ) {
     this.name = name;
     this.value = undefined;
-    this.options = options;
+    // create copies of the original options arrays!
+    this.allOptions = [...options];
+    this.options = [...options];
     this.hasValidValue = true;
     this.highlight = false;
   }
 
   public invalidateOptions(digits: number[]): void {
-    this.options = this.options.filter(option => !digits.includes(option));
+    this.options = this.allOptions.filter(option => !digits.includes(option));
   }
 }
