@@ -121,11 +121,11 @@ class CellUI extends React.Component<ICellProps, ICellState> {
 function mapStateToProps(state: IState, ownProps: ICellProps): any {
   return {
     isCellSelected: ownProps.cellName === state.selectedCellName,
-    hasValidValue: state.game.getCell(ownProps.cellName).hasValidValue,
-    cellValue: state.game.getCell(ownProps.cellName).value,
-    cellOptions: state.game.getCell(ownProps.cellName).options,
-    highlight: state.game.getCell(ownProps.cellName).highlight,
-    nextCellName: state.game.nextCellName,
+    hasValidValue: state.sudokuChoice.game.getCell(ownProps.cellName).hasValidValue,
+    cellValue: state.sudokuChoice.game.getCell(ownProps.cellName).value,
+    cellOptions: state.sudokuChoice.game.getCell(ownProps.cellName).options,
+    highlight: state.sudokuChoice.game.getCell(ownProps.cellName).highlight,
+    nextCellName: state.sudokuChoice.game.nextCellName,
     viewCellOptions: state.viewCellOptions,
     viewCellNames: state.viewCellNames
   };

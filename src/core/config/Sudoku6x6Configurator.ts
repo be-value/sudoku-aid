@@ -1,5 +1,5 @@
 import { ISudokuConfigurator } from "./ISudokuConfigurator";
-import { Cell } from "./Cell";
+import { Cell } from "../Cell";
 
 export class Sudoku6x6Configurator implements ISudokuConfigurator {
   private readonly cols: string = "abcdef";

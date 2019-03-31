@@ -1,7 +1,7 @@
-import { Sudoku } from "../../core/Sudoku";
+import { ISudokuChoice } from "../../components/Game/SudokuType";
 
 export interface IState {
-  game: Sudoku;
+  sudokuChoice: ISudokuChoice;
   selectedCellName: string;
   viewCellOptions: boolean;
   viewCellNames: boolean;
