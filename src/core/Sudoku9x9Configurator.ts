@@ -8,7 +8,7 @@ export class Sudoku9x9Configurator implements ISudokuConfigurator {
   public cells: any = {};
   public clusters: any = {};
 
-  constructor(crossCluster: boolean = true) {
+  constructor(crossCluster: boolean = false) {
     this.createCells();
     this.createClusters(crossCluster);
   }
