@@ -6,7 +6,7 @@ const initialState: IState = {
   game: new  Sudoku(new Sudoku9x9Configurator()),
   selectedCellName: "",
   viewCellOptions: false,
-  viewCellNames: true
+  viewCellNames: false
 };
 
 export default initialState;

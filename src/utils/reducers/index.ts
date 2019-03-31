@@ -1,6 +1,6 @@
 import { Reducer } from "redux";
 import { IAction } from "../actions/IAction";
-import { SELECT_CELL, CELL_INPUT, TOGGLE_VIEW_CELL_OPTIONS } from "../actions/constants";
+import { SELECT_CELL, CELL_INPUT, TOGGLE_VIEW_CELL_OPTIONS, TOGGLE_VIEW_CELL_NAMES } from "../actions/constants";
 import { IState } from "../store/IState";
 
 function rootReducer(state: IState, action: IAction): IState {
@@ -26,6 +26,11 @@ function rootReducer(state: IState, action: IAction): IState {
   // toggling the visibility of the cell options
   if (action.type === TOGGLE_VIEW_CELL_OPTIONS) {
     return Object.assign({}, state, { viewCellOptions: action.payload });
+  }
+
+  // toggling the visibility of the cell options
+  if (action.type === TOGGLE_VIEW_CELL_NAMES) {
+    return Object.assign({}, state, { viewCellNames: action.payload });
   }
 
   return state;
