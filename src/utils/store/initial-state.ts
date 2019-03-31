@@ -4,7 +4,8 @@ import { ISudokuState } from "./ISudokuState";
 const initialState: ISudokuState = {
   game: new  Sudoku(),
   selectedCellName: "",
-  viewCellOptions: false
+  viewCellOptions: false,
+  viewCellNames: true
 };
 
 export default initialState;

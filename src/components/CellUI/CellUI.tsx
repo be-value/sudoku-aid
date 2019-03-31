@@ -105,6 +105,13 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
           >
             {this.props.cellOptions}
           </text>}
+          { this.props.viewCellNames && <text
+            x={this.props.size * 0.05}
+            y={this.props.size * 0.1}
+            fontSize={this.props.size * 0.1}
+          >
+            {this.props.cellName}
+          </text>}
         </g>
       </svg>
     );
@@ -119,7 +126,8 @@ function mapStateToProps(state: ISudokuState, ownProps: ICellUIProps): any {
     cellOptions: state.game.getCell(ownProps.cellName).options,
     highlight: state.game.getCell(ownProps.cellName).highlight,
     nextCellName: state.game.nextCellName,
-    viewCellOptions: state.viewCellOptions
+    viewCellOptions: state.viewCellOptions,
+    viewCellNames: state.viewCellNames
   };
 }
 

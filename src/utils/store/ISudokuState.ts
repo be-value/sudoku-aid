@@ -4,4 +4,5 @@ export interface ISudokuState {
   game: Sudoku;
   selectedCellName: string;
   viewCellOptions: boolean;
+  viewCellNames: boolean;
 }

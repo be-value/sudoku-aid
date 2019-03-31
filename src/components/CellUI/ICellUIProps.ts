@@ -11,6 +11,7 @@ export interface ICellUIProps {
   isCellSelected?: boolean;
   hasValidValue?: boolean;
   viewCellOptions?: boolean;
+  viewCellNames?: boolean;
   highlight?: boolean;
 
   // dispatching methods
