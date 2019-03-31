@@ -1,4 +1,4 @@
-export interface ICellUIProps {
+export interface ICellProps {
   // properties received from parent
   size: number;
   x: number;
@@ -11,6 +11,8 @@ export interface ICellUIProps {
   isCellSelected?: boolean;
   hasValidValue?: boolean;
   viewCellOptions?: boolean;
+  viewCellNames?: boolean;
+  highlight?: boolean;
 
   // dispatching methods
   selectCell?: any;

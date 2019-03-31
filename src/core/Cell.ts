@@ -6,22 +6,31 @@ export class Cell {
   public value: number | undefined;
 
   // the possible options for of the cell
-  public options: Array<number> | undefined;
+  public options: Array<number>;
 
-  // an indicator whether the cell value is value in its clusters
+  // an indicator whether the cell value is valid in its clusters
   public hasValidValue: boolean;
+
+  // an indicator for visibility in cross clusters
+  public highlight: boolean;
+
+  // the complete list of all the possible options
+  private readonly allOptions: Array<number>;
 
   constructor(
     name: string,
-    value: number | undefined
+    options: Array<number>
   ) {
     this.name = name;
-    this.value = value;
-    this.options = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    this.value = undefined;
+    // create copies of the original options arrays!
+    this.allOptions = [...options];
+    this.options = [...options];
     this.hasValidValue = true;
+    this.highlight = false;
   }
 
   public invalidateOptions(digits: number[]): void {
-    this.options = [1, 2, 3, 4, 5, 6, 7, 8, 9].filter(option => !digits.includes(option));
+    this.options = this.allOptions.filter(option => !digits.includes(option));
   }
 }

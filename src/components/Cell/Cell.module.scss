@@ -1,0 +1,49 @@
+.cell {
+  rect {
+    stroke-width: 1pt;
+    fill: inherit;
+    cursor: inherit;
+  }
+}
+
+.bkWhite {
+  fill: white;
+}
+
+.bkLightGray {
+  fill: lightgray;
+}
+
+.bkLightBlue {
+  fill: lightblue;
+}
+
+.fgBlack {
+  rect {
+    stroke: black;
+  }
+
+  text {
+    fill: black;
+  }
+}
+
+.fgBlue {
+  rect {
+    stroke: blue;
+  }
+
+  text {
+    fill: blue;
+  }
+}
+
+.fgRed {
+  rect {
+    stroke: red;
+  }
+
+  text {
+    fill: red;
+  }
+}

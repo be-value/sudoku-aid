@@ -1,15 +1,21 @@
 import React from "react";
-import { ICellUIState } from "./ICellUIState";
-import { ICellUIProps } from "./ICellUIProps";
+import { ICellState } from "./ICellState";
+import { ICellProps } from "./ICellProps";
 import { connect } from "react-redux";
 import { selectCell, cellInput } from "../../utils/actions";
-import styles from "./CellUI.module.scss";
-import { ISudokuState } from "../../utils/store/ISudokuState";
+import styles from "./Cell.module.scss";
+import { IState } from "../../utils/store/IState";
 
-class CellUI extends React.Component<ICellUIProps, ICellUIState> {
-  constructor(props: ICellUIProps) {
+class CellUI extends React.Component<ICellProps, ICellState> {
+  constructor(props: ICellProps) {
     super(props);
+    this.state = { classes: this.classNames(this.props)};
   }
+
+  componentWillReceiveProps(nextProps: ICellProps): void {
+    this.setState( {classes: this.classNames(nextProps)});
+  }
+
 
   private cellInput = (e: any) => {
     // prevent default behavior to prevent input field getting populated
@@ -55,6 +61,19 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
     }
   }
 
+  private classNames = (props: ICellProps) => {
+    let classes: any = {
+      [styles.cell]: true,
+      [styles.bkWhite]: !props.isCellSelected && !props.highlight,
+      [styles.bkLightGray]: !props.isCellSelected && props.highlight,
+      [styles.bkLightBlue]: props.isCellSelected,
+      [styles.fgBlack]: !props.isCellSelected && props.hasValidValue,
+      [styles.fgBlue]: props.isCellSelected && props.hasValidValue,
+      [styles.fgRed]: !props.hasValidValue
+    };
+    return Object.entries(classes).filter(([key, value]) => value).map(([key, value]) => key).join(" ");
+  }
+
   public render(): JSX.Element {
     return (
       <svg
@@ -66,17 +85,7 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
         onKeyDown={this.cellInput}
         tabIndex={0}
       >
-        <g
-          className={
-            this.props.isCellSelected
-              ? (this.props.hasValidValue
-                ? styles.selectedCell
-                : styles.invalidSelectedCell)
-              : (this.props.hasValidValue
-                ? styles.cell
-                : styles.invalidCell)
-          }
-        >
+        <g className={this.state.classes}>
           <rect x="0" y="0" width={this.props.size} height={this.props.size} />
           <foreignObject>
             <input id={this.props.cellName} type={"number"} />
@@ -96,20 +105,29 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
           >
             {this.props.cellOptions}
           </text>}
+          { this.props.viewCellNames && <text
+            x={this.props.size * 0.05}
+            y={this.props.size * 0.1}
+            fontSize={this.props.size * 0.1}
+          >
+            {this.props.cellName}
+          </text>}
         </g>
       </svg>
     );
   }
 }
 
-function mapStateToProps(state: ISudokuState, ownProps: ICellUIProps): any {
+function mapStateToProps(state: IState, ownProps: ICellProps): any {
   return {
     isCellSelected: ownProps.cellName === state.selectedCellName,
     hasValidValue: state.game.getCell(ownProps.cellName).hasValidValue,
     cellValue: state.game.getCell(ownProps.cellName).value,
     cellOptions: state.game.getCell(ownProps.cellName).options,
+    highlight: state.game.getCell(ownProps.cellName).highlight,
     nextCellName: state.game.nextCellName,
-    viewCellOptions: state.viewCellOptions
+    viewCellOptions: state.viewCellOptions,
+    viewCellNames: state.viewCellNames
   };
 }
 

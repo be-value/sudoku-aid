@@ -1,7 +1,8 @@
 import { Sudoku } from "../../core/Sudoku";
 
-export interface ISudokuState {
+export interface IState {
   game: Sudoku;
   selectedCellName: string;
   viewCellOptions: boolean;
+  viewCellNames: boolean;
 }
