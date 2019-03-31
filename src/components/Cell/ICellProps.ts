@@ -1,4 +1,4 @@
-export interface ICellUIProps {
+export interface ICellProps {
   // properties received from parent
   size: number;
   x: number;

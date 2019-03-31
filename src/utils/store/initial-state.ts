@@ -1,8 +1,8 @@
 import { Sudoku } from "../../core/Sudoku";
-import { ISudokuState } from "./ISudokuState";
+import { IState } from "./IState";
 import { Sudoku9x9Configurator } from "../../core/Sudoku9x9Configurator";
 
-const initialState: ISudokuState = {
+const initialState: IState = {
   game: new  Sudoku(new Sudoku9x9Configurator()),
   selectedCellName: "",
   viewCellOptions: false,

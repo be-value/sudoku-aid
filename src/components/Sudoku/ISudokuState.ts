@@ -1,4 +1,4 @@
-export interface ISudokuUIState {
+export interface ISudokuState {
   width: number;
   height: number;
 }

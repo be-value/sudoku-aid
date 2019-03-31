@@ -1,12 +1,12 @@
 import React from "react";
 import store from "../../utils/store";
 import { Provider } from "react-redux";
-import SudokuUI from "../SudokuUI/SudokuUI";
+import Game from "../Game/Game";
 
 
 const App : any = () => (
   <Provider store={store}>
-    <SudokuUI/>
+    <Game />
   </Provider>
 );
 

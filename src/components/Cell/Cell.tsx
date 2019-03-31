@@ -1,18 +1,18 @@
 import React from "react";
-import { ICellUIState } from "./ICellUIState";
-import { ICellUIProps } from "./ICellUIProps";
+import { ICellState } from "./ICellState";
+import { ICellProps } from "./ICellProps";
 import { connect } from "react-redux";
 import { selectCell, cellInput } from "../../utils/actions";
-import styles from "./CellUI.module.scss";
-import { ISudokuState } from "../../utils/store/ISudokuState";
+import styles from "./Cell.module.scss";
+import { IState } from "../../utils/store/IState";
 
-class CellUI extends React.Component<ICellUIProps, ICellUIState> {
-  constructor(props: ICellUIProps) {
+class CellUI extends React.Component<ICellProps, ICellState> {
+  constructor(props: ICellProps) {
     super(props);
     this.state = { classes: this.classNames(this.props)};
   }
 
-  componentWillReceiveProps(nextProps: ICellUIProps): void {
+  componentWillReceiveProps(nextProps: ICellProps): void {
     this.setState( {classes: this.classNames(nextProps)});
   }
 
@@ -61,7 +61,7 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
     }
   }
 
-  private classNames = (props: ICellUIProps) => {
+  private classNames = (props: ICellProps) => {
     let classes: any = {
       [styles.cell]: true,
       [styles.bkWhite]: !props.isCellSelected && !props.highlight,
@@ -118,7 +118,7 @@ class CellUI extends React.Component<ICellUIProps, ICellUIState> {
   }
 }
 
-function mapStateToProps(state: ISudokuState, ownProps: ICellUIProps): any {
+function mapStateToProps(state: IState, ownProps: ICellProps): any {
   return {
     isCellSelected: ownProps.cellName === state.selectedCellName,
     hasValidValue: state.game.getCell(ownProps.cellName).hasValidValue,
