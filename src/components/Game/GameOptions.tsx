@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import Switch from "react-switch";
+import Switch from "@material-ui/core/Switch";
+import Typography from "@material-ui/core/Typography";
 import { toggleViewCellOptions, toggleViewCellNames } from "../../utils/actions";
 import { connect } from "react-redux";
 import { IState } from "../../utils/store/IState";
 import { IGameOptionsProps } from "./IGameOptionsProps";
+import { FormGroup, FormControlLabel } from "@material-ui/core";
 
 class GameOptions extends Component<IGameOptionsProps> {
   constructor(props: any) {
@@ -12,13 +14,13 @@ class GameOptions extends Component<IGameOptionsProps> {
     this.handleViewCellNamesChanged = this.handleViewCellNamesChanged.bind(this);
   }
 
-  handleViewCellOptionsChanged = (checked: boolean) => {
+  handleViewCellOptionsChanged = (event: any, checked: boolean) => {
     if (this.props.toggleViewCellOptions !== undefined) {
       this.props.toggleViewCellOptions(checked);
     }
   }
 
-  handleViewCellNamesChanged = (checked: boolean) => {
+  handleViewCellNamesChanged = (event: any, checked: boolean) => {
     if (this.props.toggleViewCellNames !== undefined) {
       this.props.toggleViewCellNames(checked);
     }
@@ -27,15 +29,21 @@ class GameOptions extends Component<IGameOptionsProps> {
   render(): JSX.Element {
     return (
       <div style={{ float: "left", marginLeft: "30px"}}>
-        <h1>Sudoku aid</h1>
-        <div style={{ marginBottom: "15px"}}>
-          <Switch onChange={this.handleViewCellNamesChanged} checked={this.props.viewCellNames as boolean}></Switch>
-          <span style={{ marginLeft: "15px"}}>Show cell names</span>
-        </div>
-        <div style={{ marginBottom: "15px"}}>
-          <Switch onChange={this.handleViewCellOptionsChanged} checked={this.props.viewCellOptions as boolean}></Switch>
-          <span style={{ marginLeft: "15px"}}>Show cell options</span>
-        </div>
+        <h3>Sudoku aid</h3>
+        <FormGroup row>
+          <FormControlLabel
+            control={
+              <Switch onChange={this.handleViewCellNamesChanged} checked={this.props.viewCellNames as boolean} color="primary"/>
+            }
+            label="cell names"
+          />
+          <FormControlLabel
+            control={
+              <Switch onChange={this.handleViewCellOptionsChanged} checked={this.props.viewCellOptions as boolean} color="primary"/>
+            }
+            label="cell options"
+          />
+        </FormGroup>
       </div>
     );
   }

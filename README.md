@@ -12,6 +12,7 @@ The application uses Scalable Vector Graphics (svg) to display the sudoku utiliz
     * TypeScript
     * React
     * Redux
+    * [Material design](https://material-ui.com/)
 2. GitFlow branching/merging process
 3. GitHub repository
 4. Azure Devops
