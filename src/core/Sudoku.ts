@@ -1,5 +1,5 @@
 import { Cell } from "./Cell";
-import { ISudokuConfigurator } from "./ISudokuConfigurator";
+import { ISudokuConfigurator } from "./config/ISudokuConfigurator";
 
 export class Sudoku {
     private cfg: ISudokuConfigurator;
