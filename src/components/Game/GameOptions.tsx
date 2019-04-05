@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Switch from "@material-ui/core/Switch";
 import Select from "@material-ui/core/Select";
-import FormControl from '@material-ui/core/FormControl';
+import FormControl from "@material-ui/core/FormControl";
 import { toggleViewCellOptions, toggleViewCellNames, selectSudokuType } from "../../utils/actions";
 import { connect } from "react-redux";
 import { IState } from "../../utils/store/IState";
