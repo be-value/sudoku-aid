@@ -25,7 +25,7 @@ const sudokuChoices: Array<ISudokuChoice> = [
     frontend: new Sudoku9x9(undefined)
   },
   {
-    type: SudokuType._9x9,
+    type: SudokuType._9x9Cross,
     game: new Sudoku(new Sudoku9x9Configurator(true)),
     frontend: new Sudoku9x9(undefined)
   },
@@ -35,21 +35,12 @@ const sudokuChoices: Array<ISudokuChoice> = [
     frontend: new Sudoku6x6(undefined)
   },
   {
-    type: SudokuType._6x6,
+    type: SudokuType._6x6Cross,
     game: new Sudoku(new Sudoku6x6Configurator(true)),
     frontend: new Sudoku6x6(undefined)
   }
 ];
 
-function getRandomInt(max: number): number {
-  return Math.floor(Math.random() * Math.floor(max));
-}
-
 export function sudokuChoice(type: SudokuType): ISudokuChoice {
   return sudokuChoices.find(sc => sc.type === type) as ISudokuChoice;
-}
-
-export function randomSudokuChoice(): ISudokuChoice {
-  let idx: number = getRandomInt(sudokuChoices.length);
-  return sudokuChoices[idx];
 }

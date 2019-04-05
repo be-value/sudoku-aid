@@ -1,8 +1,8 @@
 import { IState } from "./IState";
-import { randomSudokuChoice } from "../../components/Game/SudokuType";
+import { SudokuType, sudokuChoice } from "../../components/Game/SudokuType";
 
 const initialState: IState = {
-  sudokuChoice: randomSudokuChoice(),
+  sudokuChoice: sudokuChoice(SudokuType._9x9),
   selectedCellName: "",
   viewCellOptions: false,
   viewCellNames: false
