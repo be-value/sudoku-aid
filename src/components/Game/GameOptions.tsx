@@ -32,6 +32,13 @@ class GameOptions extends Component<IGameOptionsProps> {
   handleViewCellHintsChanged = (event: any, checked: boolean) => {
     if (this.props.toggleViewCellHints !== undefined) {
       this.props.toggleViewCellHints(checked);
+      if (checked) {
+        setTimeout(() => {
+          if (this.props.toggleViewCellHints !== undefined) {
+            this.props.toggleViewCellHints(!checked);
+          }
+        }, 2000);
+      }
     }
   }
 

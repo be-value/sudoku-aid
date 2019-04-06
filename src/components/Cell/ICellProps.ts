@@ -12,7 +12,9 @@ export interface ICellProps {
   hasValidValue?: boolean;
   viewCellOptions?: boolean;
   viewCellNames?: boolean;
-  highlight?: boolean;
+  viewCellHints?: boolean;
+  crossHighlight?: boolean;
+  hintHighlight?: boolean;
 
   // dispatching methods
   selectCell?: any;

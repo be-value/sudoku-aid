@@ -83,9 +83,9 @@ export class Sudoku9x9Configurator implements ISudokuConfigurator {
 
       if (crossCluster) {
         this.clusters.X = ["a1", "b2", "c3", "d4", "e5", "f6", "g7", "h8", "i9"].map(key => this.cells[key]);
-        this.clusters.X.forEach((c: Cell) => c.highlight = true);
+        this.clusters.X.forEach((c: Cell) => c.crossHighlight = true);
         this.clusters.Y = ["a9", "b8", "c7", "d6", "e5", "f4", "g3", "h2", "i1"].map(key => this.cells[key]);
-        this.clusters.Y.forEach((c: Cell) => c.highlight = true);
+        this.clusters.Y.forEach((c: Cell) => c.crossHighlight = true);
       }
   }
 

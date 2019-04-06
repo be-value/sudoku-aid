@@ -43,7 +43,9 @@ function rootReducer(state: IState, action: IAction): IState {
 
   // toggling the visibility of cell hints
   if (action.type === TOGGLE_VIEW_CELL_HINTS) {
-    return Object.assign({}, state, { viewCellHints: action.payload });
+    let newState: IState = Object.assign({}, state, { viewCellHints: action.payload });
+    newState.sudokuChoice.game.processHints(action.payload);
+    return newState;
   }
 
   // selecting another sudoku type
