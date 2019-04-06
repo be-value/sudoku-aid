@@ -5,4 +5,5 @@ export interface IState {
   selectedCellName: string;
   viewCellOptions: boolean;
   viewCellNames: boolean;
+  viewCellHints: boolean;
 }

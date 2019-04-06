@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { selectCell, cellInput } from "../../utils/actions";
 import styles from "./Cell.module.scss";
 import { IState } from "../../utils/store/IState";
+import { Cell } from "../../core/Cell";
 
 class CellUI extends React.Component<ICellProps, ICellState> {
   constructor(props: ICellProps) {
@@ -64,8 +65,9 @@ class CellUI extends React.Component<ICellProps, ICellState> {
   private classNames = (props: ICellProps) => {
     let classes: any = {
       [styles.cell]: true,
-      [styles.bkWhite]: !props.isCellSelected && !props.highlight,
-      [styles.bkLightGray]: !props.isCellSelected && props.highlight,
+      [styles.bkWhite]: !props.isCellSelected && !props.crossHighlight && !(props.viewCellHints && props.hintHighlight),
+      [styles.bkLightGray]: !props.isCellSelected && props.crossHighlight && !(props.viewCellHints && props.hintHighlight),
+      [styles.bkLightGreen]: !props.isCellSelected && props.viewCellHints && props.viewCellHints && props.hintHighlight,
       [styles.bkLightBlue]: props.isCellSelected,
       [styles.fgBlack]: !props.isCellSelected && props.hasValidValue,
       [styles.fgBlue]: props.isCellSelected && props.hasValidValue,
@@ -98,7 +100,7 @@ class CellUI extends React.Component<ICellProps, ICellState> {
           >
             {this.props.cellValue}
           </text>
-          { this.props.viewCellOptions && this.props.cellValue === undefined && <text
+          { this.props.viewCellOptions && <text
             x={this.props.size * 0.05}
             y={this.props.size * 0.95}
             fontSize={this.props.size * 0.15}
@@ -119,15 +121,18 @@ class CellUI extends React.Component<ICellProps, ICellState> {
 }
 
 function mapStateToProps(state: IState, ownProps: ICellProps): any {
+  let cell: Cell = state.sudokuChoice.game.getCell(ownProps.cellName);
   return {
     isCellSelected: ownProps.cellName === state.selectedCellName,
-    hasValidValue: state.sudokuChoice.game.getCell(ownProps.cellName).hasValidValue,
-    cellValue: state.sudokuChoice.game.getCell(ownProps.cellName).value,
-    cellOptions: state.sudokuChoice.game.getCell(ownProps.cellName).options,
-    highlight: state.sudokuChoice.game.getCell(ownProps.cellName).highlight,
+    hasValidValue: cell.hasValidValue,
+    cellValue: cell.value,
+    cellOptions: cell.options,
+    crossHighlight: cell.crossHighlight,
+    hintHighlight: cell.hintHighlight,
     nextCellName: state.sudokuChoice.game.nextCellName,
     viewCellOptions: state.viewCellOptions,
-    viewCellNames: state.viewCellNames
+    viewCellNames: state.viewCellNames,
+    viewCellHints: state.viewCellHints,
   };
 }
 
