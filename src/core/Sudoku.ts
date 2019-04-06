@@ -65,7 +65,8 @@ export class Sudoku {
             let duplicateValues: number[] = this.duplicateValues(filledValues);
 
             cell.invalidateOptions(this.uniqueValues(filledValues));
-            cell.hasValidValue = cell.value === undefined || !duplicateValues.includes(cell.value as number);
+            cell.hasValidValue = (cell.value === undefined && cell.options.length !== 0)
+               || (cell.value !== undefined && !duplicateValues.includes(cell.value as number));
         });
     }
 
