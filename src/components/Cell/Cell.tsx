@@ -67,8 +67,8 @@ class CellUI extends React.Component<ICellProps, ICellState> {
       [styles.cell]: true,
       [styles.bkWhite]: !props.isCellSelected && !props.crossHighlight && !(props.viewCellHints && props.hintHighlight),
       [styles.bkLightGray]: !props.isCellSelected && props.crossHighlight && !(props.viewCellHints && props.hintHighlight),
-      [styles.bkLightGreen]: !props.isCellSelected && props.viewCellHints && props.viewCellHints && props.hintHighlight,
-      [styles.bkLightBlue]: props.isCellSelected,
+      [styles.bkLightBlue]: props.isCellSelected && !(props.viewCellHints && props.hintHighlight),
+      [styles.bkLightGreen]: props.viewCellHints && props.hintHighlight,
       [styles.fgBlack]: !props.isCellSelected && props.hasValidValue,
       [styles.fgBlue]: props.isCellSelected && props.hasValidValue,
       [styles.fgRed]: !props.hasValidValue
