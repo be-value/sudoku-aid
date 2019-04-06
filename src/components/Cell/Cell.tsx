@@ -65,9 +65,11 @@ class CellUI extends React.Component<ICellProps, ICellState> {
   private classNames = (props: ICellProps) => {
     let classes: any = {
       [styles.cell]: true,
-      [styles.bkWhite]: !props.isCellSelected && !props.crossHighlight && !(props.viewCellHints && props.hintHighlight),
-      [styles.bkLightGray]: !props.isCellSelected && props.crossHighlight && !(props.viewCellHints && props.hintHighlight),
-      [styles.bkLightBlue]: props.isCellSelected && !(props.viewCellHints && props.hintHighlight),
+      // tslint:disable:max-line-length
+      [styles.bkWhite]: props.hasValidValue && !props.isCellSelected && !props.crossHighlight && !(props.viewCellHints && props.hintHighlight),
+      [styles.bkLightGray]: props.hasValidValue && !props.isCellSelected && props.crossHighlight && !(props.viewCellHints && props.hintHighlight),
+      [styles.bkLightBlue]: props.hasValidValue && props.isCellSelected && !(props.viewCellHints && props.hintHighlight),
+      [styles.bkLightRed]: !props.hasValidValue && !(props.viewCellHints && props.hintHighlight),
       [styles.bkLightGreen]: props.viewCellHints && props.hintHighlight,
       [styles.fgBlack]: !props.isCellSelected && props.hasValidValue,
       [styles.fgBlue]: props.isCellSelected && props.hasValidValue,
@@ -100,7 +102,7 @@ class CellUI extends React.Component<ICellProps, ICellState> {
           >
             {this.props.cellValue}
           </text>
-          { this.props.viewCellOptions && <text
+          { this.props.viewCellOptions && this.props.cellValue === undefined && <text
             x={this.props.size * 0.05}
             y={this.props.size * 0.95}
             fontSize={this.props.size * 0.15}
