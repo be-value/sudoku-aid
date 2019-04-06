@@ -5,7 +5,8 @@ const initialState: IState = {
   sudokuChoice: sudokuChoice(SudokuType._9x9),
   selectedCellName: "",
   viewCellOptions: false,
-  viewCellNames: false
+  viewCellNames: false,
+  viewCellHints: false
 };
 
 export default initialState;

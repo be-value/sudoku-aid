@@ -1,6 +1,13 @@
 import { Reducer } from "redux";
 import { IAction } from "../actions/IAction";
-import { SELECT_CELL, CELL_INPUT, TOGGLE_VIEW_CELL_OPTIONS, TOGGLE_VIEW_CELL_NAMES, SELECT_SUDOKU_TYPE } from "../actions/constants";
+import {
+  SELECT_CELL,
+  CELL_INPUT,
+  TOGGLE_VIEW_CELL_OPTIONS,
+  TOGGLE_VIEW_CELL_NAMES,
+  SELECT_SUDOKU_TYPE,
+  TOGGLE_VIEW_CELL_HINTS
+} from "../actions/constants";
 import { IState } from "../store/IState";
 import { sudokuChoice } from "../../components/Game/SudokuType";
 
@@ -32,6 +39,11 @@ function rootReducer(state: IState, action: IAction): IState {
   // toggling the visibility of the cell options
   if (action.type === TOGGLE_VIEW_CELL_NAMES) {
     return Object.assign({}, state, { viewCellNames: action.payload });
+  }
+
+  // toggling the visibility of cell hints
+  if (action.type === TOGGLE_VIEW_CELL_HINTS) {
+    return Object.assign({}, state, { viewCellHints: action.payload });
   }
 
   // selecting another sudoku type

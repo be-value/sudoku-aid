@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Switch from "@material-ui/core/Switch";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
-import { toggleViewCellOptions, toggleViewCellNames, selectSudokuType } from "../../utils/actions";
+import { toggleViewCellOptions, toggleViewCellNames, selectSudokuType, toggleViewCellHints } from "../../utils/actions";
 import { connect } from "react-redux";
 import { IState } from "../../utils/store/IState";
 import { IGameOptionsProps } from "./IGameOptionsProps";
@@ -29,6 +29,12 @@ class GameOptions extends Component<IGameOptionsProps> {
     }
   }
 
+  handleViewCellHintsChanged = (event: any, checked: boolean) => {
+    if (this.props.toggleViewCellHints !== undefined) {
+      this.props.toggleViewCellHints(checked);
+    }
+  }
+
   chooseSudokuType = (event: any) => {
     let chosen: SudokuType = event.target.value;
     if (this.props.chooseSudokuType !== undefined) {
@@ -45,13 +51,19 @@ class GameOptions extends Component<IGameOptionsProps> {
             control={
               <Switch onChange={this.handleViewCellNamesChanged} checked={this.props.viewCellNames as boolean} color="primary"/>
             }
-            label="cell names"
+            label="names"
           />
           <FormControlLabel
             control={
               <Switch onChange={this.handleViewCellOptionsChanged} checked={this.props.viewCellOptions as boolean} color="primary"/>
             }
-            label="cell options"
+            label="options"
+          />
+          <FormControlLabel
+            control={
+              <Switch onChange={this.handleViewCellHintsChanged} checked={this.props.viewCellHints as boolean} color="primary"/>
+            }
+            label="hint"
           />
         </FormGroup>
         <FormControl>
@@ -74,6 +86,7 @@ function mapStateToProps(state: IState): any {
   return {
     viewCellOptions: state.viewCellOptions,
     viewCellNames: state.viewCellNames,
+    viewCellHints: state.viewCellHints,
     sudokuType: state.sudokuChoice.type
   };
 }
@@ -84,6 +97,8 @@ function mapDispatchToProps(dispatch: any): any {
       dispatch(toggleViewCellOptions(show)),
     toggleViewCellNames: (show: boolean) =>
       dispatch(toggleViewCellNames(show)),
+    toggleViewCellHints: (show: boolean) =>
+      dispatch(toggleViewCellHints(show)),
     chooseSudokuType: (chosen: SudokuType) =>
       dispatch(selectSudokuType(chosen))
   };
