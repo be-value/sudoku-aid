@@ -39,6 +39,8 @@ export class Sudoku {
             }
         });
 
+        // enable next line for debugging purposes only to show all hints at same time
+        // hintCells.forEach(cell => cell.hintHighlight = true);
         if (hintCells.length > 0) {
             let idx: number = this.getRandomInt(hintCells.length);
             hintCells[idx].hintHighlight = true;
@@ -115,7 +117,7 @@ export class Sudoku {
     private singletonOptionCells = (cluster: Cell[]): Cell[] => {
         let result: Cell[] = new Array<Cell>();
         let optionsSets: number[][] = new Array<number[]>();
-        cluster.forEach(cell => optionsSets.push(cell.options));
+        cluster.filter(cell => cell.value === undefined).forEach(cell => optionsSets.push(cell.options));
         cluster.forEach(cell => {
             cell.options.forEach((option: number) => {
                 if (this.isSingleton(option, optionsSets)
