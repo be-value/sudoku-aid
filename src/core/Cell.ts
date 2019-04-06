@@ -12,7 +12,10 @@ export class Cell {
   public hasValidValue: boolean;
 
   // an indicator for visibility in cross clusters
-  public highlight: boolean;
+  public crossHighlight: boolean;
+
+  // an indicator for hinting
+  public hintHighlight: boolean;
 
   // the complete list of all the possible options
   private readonly allOptions: Array<number>;
@@ -27,7 +30,8 @@ export class Cell {
     this.allOptions = [...options];
     this.options = [...options];
     this.hasValidValue = true;
-    this.highlight = false;
+    this.crossHighlight = false;
+    this.hintHighlight = false;
   }
 
   public invalidateOptions(digits: number[]): void {
