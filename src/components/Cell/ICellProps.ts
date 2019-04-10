@@ -1,3 +1,5 @@
+import { SudokuType } from "../Game/SudokuType";
+
 export interface ICellProps {
   // properties received from parent
   size: number;
@@ -15,9 +17,9 @@ export interface ICellProps {
   viewCellHints?: boolean;
   crossHighlight?: boolean;
   hintHighlight?: boolean;
+  sudokuType?: SudokuType;
 
   // dispatching methods
   selectCell?: any;
   cellInput?: any;
-  nextCellName?: any;
 }

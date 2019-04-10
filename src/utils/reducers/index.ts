@@ -16,14 +16,14 @@ function rootReducer(state: IState, action: IAction): IState {
   // selecting a cell for input (or deselecting a cel when that cell was selected)
   if (action.type === SELECT_CELL) {
     let newState: IState = Object.assign({}, state);
-    newState.selectedCellName = action.payload;
+    newState.sudokuChoice.selectedCellName = action.payload;
     return newState;
   }
 
   // inputting some value into the selected cell - or clearing the cell
   if (action.type === CELL_INPUT) {
     let newState: IState = Object.assign({}, state);
-    let cellName: string = newState.selectedCellName;
+    let cellName: string = newState.sudokuChoice.selectedCellName;
     let inputValue: number | undefined = action.payload;
 
     newState.sudokuChoice.game.processInput(cellName, inputValue);

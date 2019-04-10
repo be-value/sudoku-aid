@@ -5,7 +5,6 @@ export class Sudoku9x9Configurator implements ISudokuConfigurator {
   private readonly cols: string = "abcdefghi";
   private readonly rows: string = "123456789";
   private readonly options: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  private readonly lastIdx: number = 8;
   public cells: any = {};
   public clusters: any = {};
 
@@ -13,54 +12,6 @@ export class Sudoku9x9Configurator implements ISudokuConfigurator {
     this.createCells();
     this.createClusters(crossCluster);
   }
-
-  public nextCellName(currentCellName: string, keyCode: number): string {
-    let name: string | undefined = undefined;
-    switch (keyCode) {
-        case 35: // end
-            name = this.clusters[currentCellName[1]][this.lastIdx].name;
-            break;
-        case 36: // home
-            name = this.clusters[currentCellName[1]][0].name;
-            break;
-        case 37: { // arrow left
-            let cluster: Cell[] = this.clusters[currentCellName[1]];
-            let currentCell: Cell = cluster.find((c: Cell) => c.name === currentCellName) as Cell;
-            let idx: number = cluster.indexOf(currentCell)-1;
-            name = idx === -1 ? cluster[this.lastIdx].name : cluster[idx].name;
-            break;
-        }
-        case 39: { // arrow right
-            let cluster: Cell[] = this.clusters[currentCellName[1]];
-            let currentCell: Cell = cluster.find((c: Cell) => c.name === currentCellName) as Cell;
-            let idx: number = cluster.indexOf(currentCell)+1;
-            name = idx > this.lastIdx ? cluster[0].name : cluster[idx].name;
-            break;
-        }
-        case 33: // pgUp
-            name = this.clusters[currentCellName[0]][0].name;
-            break;
-        case 34: // pgDn
-            name = this.clusters[currentCellName[0]][this.lastIdx].name;
-            break;
-        case 38: { // arrow up
-            let cluster: Cell[] = this.clusters[currentCellName[0]];
-            let currentCell: Cell = cluster.find((c: Cell) => c.name === currentCellName) as Cell;
-            let idx: number = cluster.indexOf(currentCell)-1;
-            name = idx === -1 ? cluster[this.lastIdx].name : cluster[idx].name;
-            break;
-        }
-        case 40: { // arrow down
-            let cluster: Cell[] = this.clusters[currentCellName[0]];
-            let currentCell: Cell = cluster.find((c: Cell) => c.name === currentCellName) as Cell;
-            let idx: number = cluster.indexOf(currentCell)+1;
-            name = idx > this.lastIdx ? cluster[0].name : cluster[idx].name;
-            break;
-        }
-    }
-
-    return name as string;
-}
 
   private createCells = () => {
     Array.from(this.cols)

@@ -47,10 +47,6 @@ export class Sudoku {
         }
     }
 
-    public nextCellName = (currentCellName: string, keyCode: number): string => {
-        return this.cfg.nextCellName(currentCellName, keyCode);
-    }
-
     private recalculateGame = (cellName: string | undefined):void => {
         let suspects: Array<Cell>;
         if (cellName !== undefined) {
