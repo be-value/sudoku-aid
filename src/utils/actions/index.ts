@@ -5,7 +5,8 @@ import {
   TOGGLE_VIEW_CELL_OPTIONS,
   TOGGLE_VIEW_CELL_NAMES,
   SELECT_SUDOKU_TYPE,
-  TOGGLE_VIEW_CELL_HINTS
+  TOGGLE_VIEW_CELL_HINTS,
+  NEW_SUDOKU
 } from "./constants";
 import { SudokuType } from "../../core/config/SudokuType";
 
@@ -37,4 +38,9 @@ export function toggleViewCellHints (payload: boolean): IAction {
 // redux action for selecting sudoky type
 export function selectSudokuType (payload: SudokuType): IAction {
   return { type: SELECT_SUDOKU_TYPE, payload };
+}
+
+// redux action for selecting a new sudoku
+export function newSudoku (payload: SudokuType): IAction {
+  return { type: NEW_SUDOKU, payload };
 }

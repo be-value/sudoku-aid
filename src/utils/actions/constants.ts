@@ -4,3 +4,4 @@ export const TOGGLE_VIEW_CELL_OPTIONS: string = "TOGGLE_VIEW_CELL_OPTIONS";
 export const TOGGLE_VIEW_CELL_NAMES: string = "TOGGLE_VIEW_CELL_NAMES";
 export const TOGGLE_VIEW_CELL_HINTS: string = "TOGGLE_VIEW_CELL_HINTS";
 export const SELECT_SUDOKU_TYPE: string = "SELECT_SUDOKU_TYPE";
+export const NEW_SUDOKU: string = "NEW_SUDOKU";
