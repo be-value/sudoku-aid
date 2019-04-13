@@ -12,11 +12,9 @@ export class Sudoku {
         return this.cfg.cells[cellName];
     }
 
-    public processInput = (cellName: string, inputValue: number | undefined): void => {
+    public applyInput = (cellName: string, inputValue: number | undefined): void => {
         let newCell: Cell = this.cfg.cells[cellName];
         newCell.value = inputValue;
-
-        this.recalculateGame(cellName);
     }
 
     public processHints = (enable: boolean): void => {
@@ -47,11 +45,16 @@ export class Sudoku {
         }
     }
 
-    public nextCellName = (currentCellName: string, keyCode: number): string => {
-        return this.cfg.nextCellName(currentCellName, keyCode);
+    public serialize = (): string => {
+        return JSON.stringify(this.allCells().filter(c => c.value !== undefined).map(c => new Object({name: c.name, value: c.value})));
     }
 
-    private recalculateGame = (cellName: string | undefined):void => {
+    public deserialize = (s: string): void => {
+        JSON.parse(s).forEach((c: any) => this.applyInput(c.name, c.value));
+        this.recalculateGame(undefined);
+    }
+
+    public recalculateGame = (cellName: string | undefined):void => {
         let suspects: Array<Cell>;
         if (cellName !== undefined) {
             suspects = this.affectedCells(this.affectedClusters(cellName));
