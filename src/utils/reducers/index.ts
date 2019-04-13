@@ -8,8 +8,8 @@ import {
   SELECT_SUDOKU_TYPE,
   TOGGLE_VIEW_CELL_HINTS
 } from "../actions/constants";
-import { IState } from "../store/IState";
-import { sudokuChoice } from "../../components/Game/SudokuType";
+import { IState } from "../store/initial-state";
+import { sudokuChoice } from "../store/initial-state";
 
 function rootReducer(state: IState, action: IAction): IState {
 

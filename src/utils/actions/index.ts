@@ -7,7 +7,7 @@ import {
   SELECT_SUDOKU_TYPE,
   TOGGLE_VIEW_CELL_HINTS
 } from "./constants";
-import { SudokuType } from "../../components/Game/SudokuType";
+import { SudokuType } from "../../core/config/SudokuType";
 
 // redux action for selecting a new cell
 export function selectCell (payload: string | undefined): IAction {

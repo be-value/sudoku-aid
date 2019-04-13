@@ -4,10 +4,10 @@ import { ICellProps } from "./ICellProps";
 import { connect } from "react-redux";
 import { selectCell, cellInput } from "../../utils/actions";
 import styles from "./Cell.module.scss";
-import { IState } from "../../utils/store/IState";
+import { IState } from "../../utils/store/initial-state";
 import { Cell } from "../../core/Cell";
 import { nextCellName } from "../Sudoku/Navigator";
-import { SudokuType } from "../Game/SudokuType";
+import { SudokuType } from "../../core/config/SudokuType";
 
 class CellUI extends React.Component<ICellProps, ICellState> {
   constructor(props: ICellProps) {

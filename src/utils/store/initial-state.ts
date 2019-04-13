@@ -1,5 +1,47 @@
-import { IState } from "./IState";
-import { SudokuType, sudokuChoice } from "../../components/Game/SudokuType";
+import { Sudoku } from "../../core/Sudoku";
+import { Sudoku9x9Configurator } from "../../core/config/Sudoku9x9Configurator";
+import { Sudoku6x6Configurator } from "../../core/config/Sudoku6x6Configurator";
+import { SudokuType } from "../../core/config/SudokuType";
+
+interface ISudokuChoice {
+  type: SudokuType;
+  game: Sudoku;
+  selectedCellName: string;
+}
+
+const sudokuChoices: Array<ISudokuChoice> = [
+  {
+    type: SudokuType._9x9,
+    game: new Sudoku(new Sudoku9x9Configurator(false)),
+    selectedCellName: ""
+  },
+  {
+    type: SudokuType._9x9Cross,
+    game: new Sudoku(new Sudoku9x9Configurator(true)),
+    selectedCellName: ""
+  },
+  {
+    type: SudokuType._6x6,
+    game: new Sudoku(new Sudoku6x6Configurator(false)),
+    selectedCellName: ""
+  },
+  {
+    type: SudokuType._6x6Cross,
+    game: new Sudoku(new Sudoku6x6Configurator(true)),
+    selectedCellName: ""
+  }
+];
+
+export function sudokuChoice(type: SudokuType): ISudokuChoice {
+  return sudokuChoices.find(sc => sc.type === type) as ISudokuChoice;
+}
+
+export interface IState {
+  sudokuChoice: ISudokuChoice;
+  viewCellOptions: boolean;
+  viewCellNames: boolean;
+  viewCellHints: boolean;
+}
 
 const initialState: IState = {
   sudokuChoice: sudokuChoice(SudokuType._9x9),
@@ -9,7 +51,6 @@ const initialState: IState = {
 };
 
 function getInitialState(): IState {
-  alert("getting initial state");
   return initialState;
 }
 

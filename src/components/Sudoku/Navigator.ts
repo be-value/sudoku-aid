@@ -1,4 +1,4 @@
-import { SudokuType } from "../Game/SudokuType";
+import { SudokuType } from "../../core/config/SudokuType";
 
 export interface ISudokuLayout {
   lastIdx: number;

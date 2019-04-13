@@ -1,4 +1,4 @@
-import { SudokuType } from "../Game/SudokuType";
+import { SudokuType } from "../../core/config/SudokuType";
 
 export interface ICellProps {
   // properties received from parent

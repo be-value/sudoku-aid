@@ -4,11 +4,10 @@ import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import { toggleViewCellOptions, toggleViewCellNames, selectSudokuType, toggleViewCellHints } from "../../utils/actions";
 import { connect } from "react-redux";
-import { IState } from "../../utils/store/IState";
+import { IState } from "../../utils/store/initial-state";
 import { IGameOptionsProps } from "./IGameOptionsProps";
 import { FormGroup, FormControlLabel, MenuItem, InputLabel } from "@material-ui/core";
-import { SudokuType } from "./SudokuType";
-
+import { SudokuType } from "../../core/config/SudokuType";
 
 class GameOptions extends Component<IGameOptionsProps> {
   constructor(props: any) {
