@@ -8,5 +8,10 @@ const initialState: IState = {
   viewCellHints: false
 };
 
-export default initialState;
+function getInitialState(): IState {
+  alert("getting initial state");
+  return initialState;
+}
+
+export default getInitialState;
 

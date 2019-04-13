@@ -26,7 +26,8 @@ function rootReducer(state: IState, action: IAction): IState {
     let cellName: string = newState.sudokuChoice.selectedCellName;
     let inputValue: number | undefined = action.payload;
 
-    newState.sudokuChoice.game.processInput(cellName, inputValue);
+    newState.sudokuChoice.game.applyInput(cellName, inputValue);
+    newState.sudokuChoice.game.recalculateGame(cellName);
 
     return newState;
   }
