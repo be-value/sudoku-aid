@@ -7,29 +7,6 @@ import { ISudokuConfigurator } from "../../core/config/ISudokuConfigurator";
 
 const PERSIST_OPTIONS_KEY: string = "PERSIST_OPTIONS_KEY";
 
-// const sudokuChoices: Array<ISudokuChoice> = [
-//   {
-//     type: SudokuType._9x9,
-//     game: new Sudoku(new Sudoku9x9Configurator(false)),
-//     selectedCellName: ""
-//   },
-//   {
-//     type: SudokuType._9x9Cross,
-//     game: new Sudoku(new Sudoku9x9Configurator(true)),
-//     selectedCellName: ""
-//   },
-//   {
-//     type: SudokuType._6x6,
-//     game: new Sudoku(new Sudoku6x6Configurator(false)),
-//     selectedCellName: ""
-//   },
-//   {
-//     type: SudokuType._6x6Cross,
-//     game: new Sudoku(new Sudoku6x6Configurator(true)),
-//     selectedCellName: ""
-//   }
-// ];
-
 function sudokuConfigurator(type: SudokuType): ISudokuConfigurator {
   switch (type) {
     case SudokuType._9x9:
@@ -95,11 +72,20 @@ function dehydrateSudoku(type: SudokuType): ISudokuChoice {
   return result;
 }
 
+function removeSudokuState(type: SudokuType): void {
+  let key: string = SudokuType[type];
+  localStorage.removeItem(key);
+}
+
 // ======================================================================================================
 
 export function selectSudokuType(type: SudokuType): ISudokuChoice {
   return dehydrateSudoku(type);
-  // return sudokuChoices.find(sc => sc.type === type) as ISudokuChoice;
+}
+
+export function selectNewSudoku(type: SudokuType): ISudokuChoice {
+  removeSudokuState(type);
+  return dehydrateSudoku(type);
 }
 
 export function persistState(newState: IState): void {
