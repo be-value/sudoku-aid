@@ -28,6 +28,7 @@ const sudokuChoices: Array<ISudokuChoice> = [
 ];
 
 
+// =================================== Application state options ========================================
 interface IPersistentStateOptions {
   sudokuType: SudokuType;
   viewCellOptions: boolean;
@@ -35,24 +36,53 @@ interface IPersistentStateOptions {
   viewCellHints: boolean;
 }
 
+function persistStateOptions(options: IPersistentStateOptions): void {
+  let serialized: string = JSON.stringify(options);
+  localStorage.setItem("options", serialized);
+}
+
+function dehydrateStateOptions(): IPersistentStateOptions {
+  let serialized: string | null = localStorage.getItem("options");
+  if (serialized === null) {
+    return {
+      sudokuType: SudokuType._9x9,
+      viewCellOptions: false,
+      viewCellNames: false,
+      viewCellHints: false
+    };
+  }
+
+  JSON.parse(serialized);
+  let result: IPersistentStateOptions = Object.assign({}, JSON.parse(serialized));
+  return result;
+}
+// ======================================================================================================
+
 export function sudokuChoice(type: SudokuType): ISudokuChoice {
   return sudokuChoices.find(sc => sc.type === type) as ISudokuChoice;
 }
 
 export function persistState(newState: IState): void {
-  let persistentOptions: IPersistentStateOptions = {
+
+  // persist state options
+  let persistedStateOptions: IPersistentStateOptions = {
     sudokuType: newState.sudokuChoice.type,
     viewCellOptions: newState.viewCellOptions,
     viewCellNames: newState.viewCellNames,
     viewCellHints: newState.viewCellHints
   };
+
+  persistStateOptions(persistedStateOptions);
+
+  // todo: persist sudoku state
 }
 
 export function dehydrateState(): IState {
+  let options: IPersistentStateOptions = dehydrateStateOptions();
   return {
-    sudokuChoice: sudokuChoice(SudokuType._9x9),
-    viewCellOptions: false,
-    viewCellNames: false,
-    viewCellHints: false
+    sudokuChoice: sudokuChoice(options.sudokuType),
+    viewCellOptions: options.viewCellOptions,
+    viewCellNames: options.viewCellNames,
+    viewCellHints: options.viewCellHints
   };
 }
