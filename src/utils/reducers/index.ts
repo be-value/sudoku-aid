@@ -9,7 +9,7 @@ import {
   TOGGLE_VIEW_CELL_HINTS
 } from "../actions/constants";
 import { IState } from "../store/IState";
-import { persistState, sudokuChoice } from "../store/persist-state";
+import { persistState, selectSudokuType } from "../store/persist-state";
 
 function rootReducer(state: IState, action: IAction): IState {
   let newState: IState | undefined;
@@ -48,7 +48,7 @@ function rootReducer(state: IState, action: IAction): IState {
 
   // selecting another sudoku type
   if (action.type === SELECT_SUDOKU_TYPE) {
-    newState = Object.assign({}, state, {sudokuChoice: sudokuChoice(action.payload)});
+    newState = Object.assign({}, state, {sudokuChoice: selectSudokuType(action.payload)});
   }
 
   // only if we created new/changed state

@@ -45,6 +45,15 @@ export class Sudoku {
         }
     }
 
+    public serialize = (): string => {
+        return JSON.stringify(this.allCells().filter(c => c.value !== undefined).map(c => new Object({name: c.name, value: c.value})));
+    }
+
+    public deserialize = (s: string): void => {
+        JSON.parse(s).forEach((c: any) => this.applyInput(c.name, c.value));
+        this.recalculateGame(undefined);
+    }
+
     public recalculateGame = (cellName: string | undefined):void => {
         let suspects: Array<Cell>;
         if (cellName !== undefined) {
