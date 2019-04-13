@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import GameOptions from "./GameOptions";
 import { IState } from "../../utils/store/IState";
+import { sudokuUI } from "../Sudoku/SudokuUI";
 
 class Game extends React.Component<any> {
   constructor(props: any) {
@@ -11,7 +12,7 @@ class Game extends React.Component<any> {
   public render(): JSX.Element {
     return (
       <div>
-        {this.props.sudokuChoice.frontend.render()}
+        {sudokuUI(this.props.sudokuChoice.type).render()}
         <GameOptions />
       </div>
     );

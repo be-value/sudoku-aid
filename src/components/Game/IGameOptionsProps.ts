@@ -1,4 +1,4 @@
-import { SudokuType } from "./SudokuType";
+import { SudokuType } from "../../core/config/SudokuType";
 
 export interface IGameOptionsProps {
   viewCellOptions?: boolean;

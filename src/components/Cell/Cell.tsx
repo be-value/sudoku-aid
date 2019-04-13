@@ -6,6 +6,8 @@ import { selectCell, cellInput } from "../../utils/actions";
 import styles from "./Cell.module.scss";
 import { IState } from "../../utils/store/IState";
 import { Cell } from "../../core/Cell";
+import { nextCellName } from "../Sudoku/Navigator";
+import { SudokuType } from "../../core/config/SudokuType";
 
 class CellUI extends React.Component<ICellProps, ICellState> {
   constructor(props: ICellProps) {
@@ -26,7 +28,7 @@ class CellUI extends React.Component<ICellProps, ICellState> {
           this.props.cellInput(undefined); // backspace, space and delete
         } else {
           if (e.keyCode > 32 && e.keyCode < 41) {
-            let targetCell: string = this.props.nextCellName(this.props.cellName, e.keyCode);
+            let targetCell: string = nextCellName(this.props.sudokuType as SudokuType, this.props.cellName, e.keyCode);
             if (targetCell !== undefined) {
               this.selectCell(targetCell);
             }
@@ -125,13 +127,13 @@ class CellUI extends React.Component<ICellProps, ICellState> {
 function mapStateToProps(state: IState, ownProps: ICellProps): any {
   let cell: Cell = state.sudokuChoice.game.getCell(ownProps.cellName);
   return {
-    isCellSelected: ownProps.cellName === state.selectedCellName,
+    isCellSelected: ownProps.cellName === state.sudokuChoice.selectedCellName,
     hasValidValue: cell.hasValidValue,
     cellValue: cell.value,
     cellOptions: cell.options,
     crossHighlight: cell.crossHighlight,
     hintHighlight: cell.hintHighlight,
-    nextCellName: state.sudokuChoice.game.nextCellName,
+    sudokuType: state.sudokuChoice.type,
     viewCellOptions: state.viewCellOptions,
     viewCellNames: state.viewCellNames,
     viewCellHints: state.viewCellHints,
