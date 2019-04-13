@@ -9,4 +9,5 @@ export interface IGameOptionsProps {
   toggleViewCellHints?(show: boolean): void;
   sudokuType?: SudokuType;
   chooseSudokuType?(chosen: SudokuType): void;
+  selectNewGame?(type: SudokuType): void;
 }

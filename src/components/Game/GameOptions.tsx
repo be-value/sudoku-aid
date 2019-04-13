@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import Switch from "@material-ui/core/Switch";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
-import { toggleViewCellOptions, toggleViewCellNames, selectSudokuType, toggleViewCellHints } from "../../utils/actions";
+import { toggleViewCellOptions, toggleViewCellNames, selectSudokuType, toggleViewCellHints, newSudoku } from "../../utils/actions";
 import { connect } from "react-redux";
 import { IState } from "../../utils/store/IState";
 import { IGameOptionsProps } from "./IGameOptionsProps";
-import { FormGroup, FormControlLabel, MenuItem, InputLabel } from "@material-ui/core";
+import { FormGroup, FormControlLabel, MenuItem, InputLabel, Button } from "@material-ui/core";
 import { SudokuType } from "../../core/config/SudokuType";
 
 class GameOptions extends Component<IGameOptionsProps> {
@@ -48,6 +48,12 @@ class GameOptions extends Component<IGameOptionsProps> {
     }
   }
 
+  selectNewGame = (event: any) => {
+    if (this.props.selectNewGame !== undefined) {
+      this.props.selectNewGame(this.props.sudokuType as SudokuType);
+    }
+  }
+
   render(): JSX.Element {
     return (
       <div style={{ float: "left", marginLeft: "30px"}}>
@@ -72,8 +78,9 @@ class GameOptions extends Component<IGameOptionsProps> {
             label="hint"
           />
         </FormGroup>
+        <FormGroup row>
         <FormControl>
-          <InputLabel>Sudoku</InputLabel>
+          {/* <InputLabel>Sudoku</InputLabel> */}
           <Select
             value={this.props.sudokuType as SudokuType}
             onChange={this.chooseSudokuType}>
@@ -83,6 +90,8 @@ class GameOptions extends Component<IGameOptionsProps> {
             <MenuItem value={SudokuType._6x6Cross}>6x6 X</MenuItem>
           </Select>
         </FormControl>
+          <Button variant="contained" style={{margin: "5px"}} onClick={this.selectNewGame}>New</Button>
+        </FormGroup>
       </div>
     );
   }
@@ -106,7 +115,9 @@ function mapDispatchToProps(dispatch: any): any {
     toggleViewCellHints: (show: boolean) =>
       dispatch(toggleViewCellHints(show)),
     chooseSudokuType: (chosen: SudokuType) =>
-      dispatch(selectSudokuType(chosen))
+      dispatch(selectSudokuType(chosen)),
+    selectNewGame: (type: SudokuType) =>
+      dispatch(newSudoku(type))
   };
 }
 
