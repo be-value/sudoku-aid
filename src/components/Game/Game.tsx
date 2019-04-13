@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import GameOptions from "./GameOptions";
-import { IState } from "../../utils/store/initial-state";
+import { IState } from "../../utils/store/IState";
 import { sudokuUI } from "../Sudoku/SudokuUI";
 
 class Game extends React.Component<any> {
