@@ -1,6 +1,6 @@
 # Sudoku Aid
 
-This is a pet project for learning and showcasing React while delivering a real and usable functionality to the public.
+This is a pet project for learning and showcasing React while delivering a real and usable functionality to the public..
 The aim of this application is NOT to solve sudoku puzzles (although it could) but to help any sudoku fetishists controlling their frustrations about getting stuck at some point....
 
 Try the application on: [Sudoku Web](https://sudokuweb.z6.web.core.windows.net)
